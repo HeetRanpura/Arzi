@@ -1,0 +1,27 @@
+name: Eval (synthetic only)
+
+# Manual only: this spends Tinker credits. It evaluates on data/generated/eval_synth.jsonl
+# and must never be pointed at real letters (data/real/ is not in the repo).
+on:
+  workflow_dispatch:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    env:
+      TINKER_API_KEY: ${{ secrets.TINKER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -e ".[tinker]"
+      - run: python -m arzi.eval.run_eval --model base --set synth
+      - run: python -m arzi.eval.run_eval --model ft --set synth
+      - run: python -m arzi.eval.report --set synth
+      - run: cat eval/results/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-summary
+          path: eval/results/summary.md

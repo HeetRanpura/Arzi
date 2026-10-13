@@ -1,0 +1,13 @@
+# never commit real letters, raw generations, weights or secrets
+data/real/
+data/generated/raw/
+models/
+.env
+
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.DS_Store
+.claude/

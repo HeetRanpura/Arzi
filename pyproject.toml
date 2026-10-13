@@ -1,0 +1,36 @@
+[project]
+name = "arzi"
+version = "0.1.0"
+description = "Local, private check of whether a rejected Indian health insurance claim is worth contesting."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.6",
+    "python-dotenv>=1.0",
+    "rich>=13.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+# training, synthetic data generation and eval (cloud, synthetic data only)
+tinker = ["tinker", "tinker-cookbook"]
+# local app: document extraction, inference, UI
+app = [
+    "gradio>=4.0",
+    "transformers>=4.45",
+    "torch>=2.3",
+    "pypdf>=4.0",
+    "pytesseract>=0.3.10",
+    "Pillow>=10.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/arzi"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
