@@ -1,0 +1,66 @@
+[
+ {
+  "name": "v1",
+  "finished_at": "2026-10-13T19:13:55+00:00",
+  "base_model": "Qwen/Qwen3.5-4B",
+  "renderer": "qwen3_5_disable_thinking",
+  "train_file": "data/generated/train.jsonl",
+  "rows": 596,
+  "epochs": 2,
+  "lora_rank": 32,
+  "batch_size": 8,
+  "learning_rate": 0.0004905250962784578,
+  "sampler_path": "tinker://3c333ded-7fe3-5689-9bbb-d952668d4bc1:train:0/sampler_weights/final",
+  "state_path": "tinker://3c333ded-7fe3-5689-9bbb-d952668d4bc1:train:0/weights/final",
+  "val_curve": [
+   {
+    "step": 0,
+    "val_nll": 0.32771655917167664,
+    "train_nll": 0.32497289776802063,
+    "sampler_path": null
+   },
+   {
+    "step": 20,
+    "val_nll": 0.0907198116183281,
+    "train_nll": 0.12411024421453476,
+    "sampler_path": "tinker://3c333ded-7fe3-5689-9bbb-d952668d4bc1:train:0/sampler_weights/000020"
+   },
+   {
+    "step": 40,
+    "val_nll": 0.04250584915280342,
+    "train_nll": 0.08082949370145798,
+    "sampler_path": "tinker://3c333ded-7fe3-5689-9bbb-d952668d4bc1:train:0/sampler_weights/000040"
+   },
+   {
+    "step": 60,
+    "val_nll": 0.034972332417964935,
+    "train_nll": 0.025003692135214806,
+    "sampler_path": "tinker://3c333ded-7fe3-5689-9bbb-d952668d4bc1:train:0/sampler_weights/000060"
+   },
+   {
+    "step": 80,
+    "val_nll": 0.020368652418255806,
+    "train_nll": 0.011366844177246094,
+    "sampler_path": "tinker://3c333ded-7fe3-5689-9bbb-d952668d4bc1:train:0/sampler_weights/000080"
+   },
+   {
+    "step": 100,
+    "val_nll": 0.01678611896932125,
+    "train_nll": 0.009558568708598614,
+    "sampler_path": "tinker://3c333ded-7fe3-5689-9bbb-d952668d4bc1:train:0/sampler_weights/000100"
+   },
+   {
+    "step": 120,
+    "val_nll": 0.016101108863949776,
+    "train_nll": 0.01378144882619381,
+    "sampler_path": "tinker://3c333ded-7fe3-5689-9bbb-d952668d4bc1:train:0/sampler_weights/000120"
+   },
+   {
+    "step": 140,
+    "val_nll": 0.01248483918607235,
+    "train_nll": 0.008661100640892982,
+    "sampler_path": "tinker://3c333ded-7fe3-5689-9bbb-d952668d4bc1:train:0/sampler_weights/000140"
+   }
+  ]
+ }
+]

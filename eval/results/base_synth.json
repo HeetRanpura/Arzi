@@ -1,0 +1,1310 @@
+{
+ "model": "base",
+ "model_name": "Qwen/Qwen3.5-4B",
+ "set": "synth",
+ "renderer": "qwen3_5_disable_thinking",
+ "metrics": {
+  "n": 117,
+  "valid_json_rate": 1.0,
+  "category_accuracy": 0.9658119658119658,
+  "verdict_accuracy": 0.4358974358974359,
+  "contestable_recall": 0.3611111111111111,
+  "over_optimism_rate": 0.2839506172839506,
+  "false_hope_rate": 0.13513513513513514,
+  "moratorium_edge_accuracy": 0.34615384615384615,
+  "fact_accuracy": 0.8533501896333755,
+  "counts": {
+   "valid_json_rate": [
+    117,
+    117
+   ],
+   "category_accuracy": [
+    113,
+    117
+   ],
+   "verdict_accuracy": [
+    51,
+    117
+   ],
+   "contestable_recall": [
+    13,
+    36
+   ],
+   "over_optimism_rate": [
+    23,
+    81
+   ],
+   "false_hope_rate": [
+    5,
+    37
+   ],
+   "moratorium_edge_accuracy": [
+    9,
+    26
+   ],
+   "fact_accuracy": [
+    675,
+    791
+   ]
+  },
+  "n_contestable": 36,
+  "n_valid": 37,
+  "n_moratorium_edge": 26,
+  "fact_accuracy_by_field": {
+   "policy_inception_date": 0.9914529914529915,
+   "admission_date": 1.0,
+   "months_continuous_coverage": 0.11965811965811966,
+   "is_accident": 0.9914529914529915,
+   "room_rent_limit_per_day": 0.9852941176470589,
+   "crc_approval_mentioned": 1.0,
+   "ped_disclosed_in_proposal": 1.0,
+   "condition_related_to_claim": 1.0,
+   "waiting_period_months": 0.9166666666666666,
+   "accident_exempt_in_wording": 0.8,
+   "restore_benefit_available_unused": 1.0,
+   "premium_paid_within_grace": 0.6666666666666666,
+   "hospital_stay_hours": 0.8,
+   "is_listed_daycare_procedure": 1.0,
+   "exclusion_in_policy_wording": 1.0,
+   "room_rent_charged_per_day": 0.8181818181818182
+  },
+  "fact_counts_by_field": {
+   "policy_inception_date": [
+    116,
+    117
+   ],
+   "admission_date": [
+    117,
+    117
+   ],
+   "months_continuous_coverage": [
+    14,
+    117
+   ],
+   "is_accident": [
+    116,
+    117
+   ],
+   "room_rent_limit_per_day": [
+    67,
+    68
+   ],
+   "crc_approval_mentioned": [
+    117,
+    117
+   ],
+   "ped_disclosed_in_proposal": [
+    26,
+    26
+   ],
+   "condition_related_to_claim": [
+    28,
+    28
+   ],
+   "waiting_period_months": [
+    22,
+    24
+   ],
+   "accident_exempt_in_wording": [
+    8,
+    10
+   ],
+   "restore_benefit_available_unused": [
+    6,
+    6
+   ],
+   "premium_paid_within_grace": [
+    4,
+    6
+   ],
+   "hospital_stay_hours": [
+    8,
+    10
+   ],
+   "is_listed_daycare_procedure": [
+    7,
+    7
+   ],
+   "exclusion_in_policy_wording": [
+    10,
+    10
+   ],
+   "room_rent_charged_per_day": [
+    9,
+    11
+   ]
+  }
+ },
+ "cases": [
+  {
+   "case_id": "eval_synth-0001",
+   "scenario": "non_network",
+   "gold_category": "other",
+   "pred_category": "other",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"other\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-06-28\",\n    \"admission_date\": \"2024-06-28\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"treatment at excluded (de-listed) provider\",\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 5000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer rejected the claim because the hospital was on their excluded list. However, the policy excerpt does not explicitly list this exclusion, making the rejection likely invalid based on the provided documents.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0002",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-03-01\",\n    \"admission_date\": \"2025-02-18\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"epilepsy\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer correctly identified a pre-existing condition (epilepsy) not declared in the proposal. Although 60 months of continuous cover exists, the specific waiting period for pre-existing diseases is 36 months, which has not been met at the time of admission.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0003",
+   "scenario": "accident_initial",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-04-28\",\n    \"admission_date\": \"2023-05-14\",\n    \"months_continuous_coverage\": 0,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 1,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": true,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for an accident, but the insurer says the 30-day waiting period applies to all claims. The policy states accidents are exempt, but the rejection letter claims the committee approved the rejection anyway. Since the letter says the decision is final and approved, contesting is unlikely to help.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0004",
+   "scenario": "not_served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-08-13\",\n    \"admission_date\": \"2025-05-18\",\n    \"months_continuous_coverage\": 23,\n    \"condition_named_by_insurer\": \"inguinal hernia\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 4000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The admission date falls within the 24-month specific disease waiting period for inguinal hernia. You have only completed 23 months of continuous coverage, which is insufficient to contest the rejection.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0005",
+   "scenario": "late_intimation",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-06-07\",\n    \"admission_date\": \"2022-08-10\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The rejection is based on late intimation (17 days), but the policy excerpt does not mention a 24-hour intimation rule. Without this specific clause, the rejection lacks a valid policy basis.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding 24-hour intimation\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0006",
+   "scenario": "disclosure_unknown",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-11-13\",\n    \"admission_date\": \"2026-07-15\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"bronchial asthma\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer claims non-disclosure of asthma, but the policy has continuous cover for exactly 60 months. Under Indian law, pre-existing diseases are covered after 60 months of continuous coverage, making this rejection contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding non-disclosure\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Explanation of how the 60-month continuous cover rule was applied\",\n    \"Evidence that the proposal form explicitly asked about asthma\",\n    \"Medical records proving the asthma was not present at inception\",\n    \"Clarification on whether the 48-month waiting period applies to unrelated conditions\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0007",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-03-30\",\n    \"admission_date\": \"2025-12-13\",\n    \"months_continuous_coverage\": 49,\n    \"condition_named_by_insurer\": \"coronary artery disease\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"pre‑existing disease not disclosed\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites a 36-month waiting period for pre-existing diseases, which you have not met (49 months total, but only 49 months since inception; however, the specific disease waiting period is 36 months). Since the disease was not disclosed and the waiting period applies, the rejection is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0008",
+   "scenario": "accident_wording_unknown",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-10-31\",\n    \"admission_date\": \"2022-09-21\",\n    \"months_continuous_coverage\": 23,\n    \"condition_named_by_insurer\": \"cataract\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for cataract surgery after an accident. The policy has a 24-month waiting period for cataract. You have only completed 23 months of continuous coverage. Since the policy does not exempt accidents from this specific disease waiting period, the rejection is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0009",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-06-11\",\n    \"admission_date\": \"2022-10-01\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": \"Chronic Hepatitis B\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"Non-disclosure of pre-existing disease\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The disease was not disclosed, and the continuous cover (24 months) is less than the 48-month waiting period for pre-existing diseases. The insurer's decision is supported by policy terms.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0010",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-09-06\",\n    \"admission_date\": \"2025-06-07\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"epilepsy\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insured has held continuous cover for 60 months, meeting the 60-month moratorium rule for pre-existing diseases. This makes the non-disclosure ground contestable despite the policy stating none were declared.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding the 60-month moratorium\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0011",
+   "scenario": "exhausted",
+   "gold_category": "sum_insured_exhausted",
+   "pred_category": "sum_insured_exhausted",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"sum_insured_exhausted\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-11-29\",\n    \"admission_date\": \"2025-03-03\",\n    \"months_continuous_coverage\": 49,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": false,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy states the sum insured is exhausted. Since the restore benefit was not opted, there is no unused amount to claim. The rejection is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0012",
+   "scenario": "moratorium",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-11-25\",\n    \"admission_date\": \"2024-12-28\",\n    \"months_continuous_coverage\": 5,\n    \"condition_named_by_insurer\": \"bronchial asthma\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The asthma condition is a pre-existing disease not disclosed. The policy has only 5 months of continuous cover, which is less than the 36-month waiting period for pre-existing diseases. The moratorium rule does not apply here.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on for the 36-month pre-existing disease waiting period\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0013",
+   "scenario": "non_network",
+   "gold_category": "other",
+   "pred_category": "other",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"other\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-01-24\",\n    \"admission_date\": \"2024-11-06\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"de-listed providers\",\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cited a de-listed hospital exclusion. The policy excerpt does not mention this specific exclusion, only a general network hospital clause. However, the letter states the decision was approved by the Claims Review Committee, making it a formal, reviewed decision rather than a simple error.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"List of all de-listed providers\",\n    \"Definition of 'emergency stabilisation' in this context\",\n    \"Copy of the hospital's network status\",\n    \"Explanation of why this specific hospital was de-listed\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0014",
+   "scenario": "lapsed",
+   "gold_category": "policy_lapsed",
+   "pred_category": "policy_lapsed",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"policy_lapsed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-12-11\",\n    \"admission_date\": \"2026-01-14\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 5000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": false,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The renewal premium was paid on 2026-01-20, which is 10 days after the grace period ended on 2025-12-26. Since the policy lapsed before admission, coverage is invalid despite 60 months of continuous cover.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding the grace period\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0015",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-05-06\",\n    \"admission_date\": \"2026-04-26\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"bronchial asthma\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites non-disclosure of a pre-existing disease (asthma) which is medically related to the claim. Although 60 months of continuous coverage have passed, the policy imposes a 36-month waiting period specifically for pre-existing diseases. Since the condition was not declared and falls within the 36-month exclusion, the rejection is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding the 36-month pre-existing disease waiting period\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0017",
+   "scenario": "short_stay",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-01-01\",\n    \"admission_date\": \"2024-12-05\",\n    \"months_continuous_coverage\": 48,\n    \"condition_named_by_insurer\": \"severe migraine attack\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 30,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 24,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer rejected the claim because hospitalization was deemed unnecessary, stating it could have been treated as OPD. The stay was exactly 24 hours, which does not meet the contestable threshold of 24 hours or more (often interpreted as exceeding 24). The treatment (migraine management) is not a listed day care procedure. With continuous coverage of 48 months, the waiting period is not the issue, but the medical necessity ground stands.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0019",
+   "scenario": "not_in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-06-19\",\n    \"admission_date\": \"2025-11-01\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"stem cell therapy for the knee\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"unproven or experimental treatment\",\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 5000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites an exclusion for unproven/experimental treatments, but this specific exclusion is not listed in the provided policy schedule. However, the policy explicitly lists permanent exclusions, and the cited reason does not match any of them. Without the full policy text showing the exact wording of the exclusion, the rejection is likely valid based on the available documents.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0020",
+   "scenario": "over_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-03-03\",\n    \"admission_date\": \"2026-06-09\",\n    \"months_continuous_coverage\": 36,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 6000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer deducted room rent because the category was above the Rs 6,000 limit. Without the specific bill showing the actual room rate charged, we cannot confirm if the deduction is correct. However, since the stay duration and exact charge are missing, the rejection is likely valid based on the policy limit.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"The specific room category occupied\",\n    \"The actual room rent charged per day\",\n    \"Calculation of the proportionate deduction\",\n    \"Evidence that the room category was above the Rs 6,000 limit\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0021",
+   "scenario": "in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-08-18\",\n    \"admission_date\": \"2023-06-18\",\n    \"months_continuous_coverage\": 49,\n    \"condition_named_by_insurer\": \"cosmetic or plastic surgery\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"cosmetic or plastic surgery\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": 48,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 5000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy explicitly excludes cosmetic surgery, and the claim is for rhinoplasty. This exclusion is clearly stated in the policy document, making the rejection valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0022",
+   "scenario": "accident_not_exempt",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-03-08\",\n    \"admission_date\": \"2021-01-15\",\n    \"months_continuous_coverage\": 23,\n    \"condition_named_by_insurer\": \"intervertebral disc prolapse\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": true,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 5000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy explicitly states that specific disease waiting periods (24 months) apply even for accidents. The insured had only 23 months of continuous cover before admission, which is less than the required 24 months.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0023",
+   "scenario": "disclosed",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-12-28\",\n    \"admission_date\": \"2025-10-05\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"bronchial asthma\",\n    \"ped_disclosed_in_proposal\": true,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer rejected due to non-disclosure of asthma, but the policy explicitly states this condition was declared. Additionally, you have completed 60 months of continuous coverage, which legally bars pre-existing disease exclusions under Indian law.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Evidence that the proposal form did not disclose asthma\",\n    \"Explanation of how 60 months of continuous cover is ignored\",\n    \"Reference to Section 45 of the IRDAI Regulations\",\n    \"Written confirmation of the pre-existing disease exclusion status\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0024",
+   "scenario": "payment_unknown",
+   "gold_category": "policy_lapsed",
+   "pred_category": "policy_lapsed",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"policy_lapsed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-09-13\",\n    \"admission_date\": \"2025-11-11\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": false,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy lapsed because the renewal premium was not paid by the due date. Even though the insured had continuous cover for 60 months, the insurer's decision stands as the policy was not active at the time of admission.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0025",
+   "scenario": "unrelated",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-09-29\",\n    \"admission_date\": \"2026-08-22\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"Chronic Hepatitis B\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": \"Non-disclosure of pre-existing disease\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for a kidney stone, unrelated to the insurer's cited Hepatitis B. However, the policy has a 48-month waiting period for pre-existing diseases, and the patient has had continuous cover for 60 months. Since the condition was not disclosed, the rejection stands.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0026",
+   "scenario": "treatment_protocol",
+   "gold_category": "other",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-06-08\",\n    \"admission_date\": \"2026-08-08\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"acute gastroenteritis\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 30,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer rejected the claim because the treatment for acute gastroenteritis was deemed unnecessary. Since the policy does not list this condition as a day-care procedure and the stay duration is unknown, the rejection is likely valid based on medical necessity.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Details of the hospital stay duration\",\n    \"Medical justification for the treatment being unnecessary\",\n    \"Confirmation if the procedure is listed as day-care\",\n    \"Evidence of standard treatment protocols for acute gastroenteritis\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0027",
+   "scenario": "moratorium",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-09-13\",\n    \"admission_date\": \"2025-02-07\",\n    \"months_continuous_coverage\": 5,\n    \"condition_named_by_insurer\": \"bronchial asthma\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The asthma condition is a pre-existing disease directly related to the claim. The policy requires a 36-month waiting period for such conditions, and only 5 months of continuous coverage exist. Non-disclosure of a pre-existing condition is a valid ground for rejection.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0028",
+   "scenario": "moratorium",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-01-20\",\n    \"admission_date\": \"2026-05-09\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"chronic hepatitis B\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites a pre-existing disease (hepatitis B) not declared. Although 60 months of continuous cover exists, the claim is for kidney stones, which are unrelated to hepatitis B. Non-disclosure of an unrelated condition typically validates the rejection.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding non-disclosure\",\n    \"Medical evidence linking hepatitis B to kidney stones\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0029",
+   "scenario": "accident_initial",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-05-02\",\n    \"admission_date\": \"2023-05-27\",\n    \"months_continuous_coverage\": 1,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 1,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim happened 25 days after the policy started. Since it is an accident, the 30-day waiting period usually applies unless the policy specifically exempts accidents, which is not shown here.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0030",
+   "scenario": "in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-03-15\",\n    \"admission_date\": \"2024-10-18\",\n    \"months_continuous_coverage\": 35,\n    \"condition_named_by_insurer\": \"sleep apnoea devices\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"sleep apnoea devices and external aids\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy explicitly lists sleep apnoea devices as a permanent exclusion. Since the claim is for a CPAP device (sleep apnoea aid), the rejection is valid based on the policy wording.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0031",
+   "scenario": "not_served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2024-08-17\",\n    \"admission_date\": \"2024-08-26\",\n    \"months_continuous_coverage\": 0,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 1,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 4000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The admission date falls exactly within the 30-day initial waiting period starting from the policy inception date. Since this is an illness claim and not an accident, and no continuous cover exists prior to this policy, the rejection is valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0032",
+   "scenario": "within_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-01-12\",\n    \"admission_date\": \"2025-04-13\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 96,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 6000,\n    \"room_rent_charged_per_day\": 5500,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer deducted room rent because the charged rate (Rs 5,500) was below the policy limit (Rs 6,000). This deduction is standard when the actual cost is less than the maximum allowed, so the rejection is valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on for the room rent deduction\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0033",
+   "scenario": "not_in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-09-29\",\n    \"admission_date\": \"2026-05-23\",\n    \"months_continuous_coverage\": 50,\n    \"condition_named_by_insurer\": \"obesity and weight-control interventions\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"obesity and weight-control interventions\",\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": 168,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites a permanent exclusion for obesity treatments. However, the policy excerpt lists only dental, alcohol abuse, experimental treatments, and refractive errors as excluded. Since the specific exclusion is not in the provided policy wording, the rejection is likely valid based on the given documents.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Full list of permanent exclusions in the policy\",\n    \"Evidence that obesity treatment is explicitly excluded in the full policy\",\n    \"Clarification on whether 'weight-control interventions' are covered under any other heading\",\n    \"Copy of the proposal form to check for pre-existing condition declarations\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0034",
+   "scenario": "limit_unknown",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "worth_asking",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-08-19\",\n    \"admission_date\": \"2024-07-26\",\n    \"months_continuous_coverage\": 36,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 168,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": 3000,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"worth_asking\",\n  \"reason\": \"The insurer deducted room rent because the category was above entitlement. However, the policy excerpt does not state the maximum room rent limit per day. Without knowing the limit, we cannot confirm if the Rs 3,000/day charge was excessive.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"The maximum room rent limit per day as per the policy wording\",\n    \"Calculation of the proportionate deduction based on the limit\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0035",
+   "scenario": "disclosure_unknown",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-11-23\",\n    \"admission_date\": \"2024-07-24\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"epilepsy\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer claims non-disclosure of epilepsy, but the policy shows continuous cover since 2019. The admission date is July 2024, meaning 60 months of continuous coverage have passed. Under Indian law, pre-existing conditions are covered after 60 months of continuous cover, making this rejection contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding non-disclosure\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Evidence that the proposal form explicitly states epilepsy was not disclosed\",\n    \"Explanation of how the 60-month continuous cover rule was ignored\",\n    \"Clarification on the definition of 'continuous cover' in this case\",\n    \"Written confirmation of the rejection decision\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0036",
+   "scenario": "exhausted",
+   "gold_category": "sum_insured_exhausted",
+   "pred_category": "sum_insured_exhausted",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"sum_insured_exhausted\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-05-14\",\n    \"admission_date\": \"2025-04-15\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": false,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy explicitly states the sum insured is exhausted and the restore benefit was already used this year. With 60 months of continuous cover, the claim is not contestable on pre-existing grounds.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0037",
+   "scenario": "moratorium",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-11-21\",\n    \"admission_date\": \"2024-11-23\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"bronchial asthma\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": \"non-disclosure of pre-existing disease\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The asthma was not declared, and the 36-month waiting period for pre-existing diseases has not yet expired, even though 60 months of continuous cover exists. The insurer's rejection is valid under the policy terms.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0038",
+   "scenario": "daycare_list_unknown",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-11-14\",\n    \"admission_date\": \"2025-08-15\",\n    \"months_continuous_coverage\": 59,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 4,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The stay was only 4 hours, which is less than the 24-hour threshold needed to contest the 'no hospitalisation' claim. The policy excerpt does not list day care procedures, so we cannot confirm if this treatment qualifies. Without more details, the rejection appears valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"The specific day care procedure list from Annexure\",\n    \"Medical justification for why IV antibiotics require hospitalisation\",\n    \"Clarification on the 24-hour hospitalisation threshold\",\n    \"Details of the treatment duration in hours\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0039",
+   "scenario": "long_stay",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-01-27\",\n    \"admission_date\": \"2023-01-14\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 30,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": 24,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The hospital stay was exactly 24 hours. The policy covers day care procedures only if the stay is under 24 hours. Since the patient was admitted and discharged at the same time (21:00 to 21:00), the claim falls outside the day care list and the insurer's rejection is valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause defining day care procedures as under 24 hours\",\n    \"Confirmation that the 24-hour stay disqualifies the claim from day care coverage\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0040",
+   "scenario": "over_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2025-10-28\",\n    \"admission_date\": \"2026-02-05\",\n    \"months_continuous_coverage\": 3,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 168,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": 11500,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The charged room rate (INR 11,500) exceeds the policy limit (INR 7,500). Proportionate deductions for over-limit rooms are standard and contestable only if the room was medically necessary and within the limit, which isn't shown here.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0041",
+   "scenario": "served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-03-31\",\n    \"admission_date\": \"2023-06-10\",\n    \"months_continuous_coverage\": 25,\n    \"condition_named_by_insurer\": \"benign prostatic hyperplasia\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": true,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The policy shows continuous cover since March 2021, making 25 months complete by June 2023. This exceeds the 24-month waiting period for this specific disease. The insurer's rejection is incorrect.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0042",
+   "scenario": "short_stay",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2022-02-17\",\n    \"admission_date\": \"2022-12-06\",\n    \"months_continuous_coverage\": 11,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 23,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The stay was only 23 hours, which is less than the 24-hour threshold for day care procedures listed in the policy. Since the treatment was not a listed day care procedure and the stay was under 24 hours, the insurer's ground is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0043",
+   "scenario": "not_in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2025-04-22\",\n    \"admission_date\": \"2025-11-25\",\n    \"months_continuous_coverage\": 7,\n    \"condition_named_by_insurer\": \"rhinoplasty\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"Cosmetic and plastic surgery procedures\",\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 4000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites a permanent exclusion for cosmetic surgery. However, the policy excerpt lists specific exclusions (experimental, alcohol abuse, sleep apnoea, dental) and does not mention cosmetic procedures. Since the cited exclusion is not in the policy wording, the rejection is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0044",
+   "scenario": "daycare_list_unknown",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-04-21\",\n    \"admission_date\": \"2024-12-22\",\n    \"months_continuous_coverage\": 36,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"hospitalisation that is not medically necessary\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": 23,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 5000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer claims the 23-hour stay was unnecessary OPD treatment. Since the stay was under 24 hours and the policy does not list this as a day care procedure, the rejection is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0045",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-06-12\",\n    \"admission_date\": \"2026-03-16\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"Chronic Hepatitis B\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"Pre-existing disease waiting period\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 5000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The policy has continuous cover for 60 months, which meets the 60-month moratorium rule for pre-existing diseases, making the rejection contestable despite the lack of disclosure.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Explanation of how the 60-month continuous cover rule was not applied\",\n    \"Clarification on the definition of continuous cover in this case\",\n    \"Details of any exceptions made for this specific claim\",\n    \"Guidance on how to appeal the decision based on the moratorium rule\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0046",
+   "scenario": "restore_unused",
+   "gold_category": "sum_insured_exhausted",
+   "pred_category": "sum_insured_exhausted",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "worth_asking",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"sum_insured_exhausted\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-04-24\",\n    \"admission_date\": \"2021-10-04\",\n    \"months_continuous_coverage\": 30,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": true,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"worth_asking\",\n  \"reason\": \"The insurer claims the sum insured is exhausted, but the policy explicitly states a restore benefit is available and unused. This allows claiming up to the full sum insured again, making the rejection contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Proof that the sum insured was actually exhausted\",\n    \"Details of the earlier claims that used the sum insured\",\n    \"Confirmation that the restore benefit has not been utilized\",\n    \"Explanation of how the restore benefit can be applied to this claim\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0047",
+   "scenario": "served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-09-26\",\n    \"admission_date\": \"2023-11-07\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": \"community-acquired pneumonia\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": 1,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The claim is contestable because the patient has completed 24 months of continuous coverage, which meets the 24-month waiting period for specific diseases. The insurer incorrectly applied the 30-day initial waiting period instead of the specific disease clause.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Clarification on why the 24-month specific disease waiting period was not applied\",\n    \"Proof that the condition is not a pre-existing disease requiring 36 months\",\n    \"Details of the specific disease list and whether pneumonia is included\",\n    \"Reconsideration of the claim based on continuous coverage duration\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0048",
+   "scenario": "not_served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2024-04-27\",\n    \"admission_date\": \"2026-02-13\",\n    \"months_continuous_coverage\": 23,\n    \"condition_named_by_insurer\": \"kidney stones\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim occurred 23 months after policy start, but kidney stones have a 24-month waiting period. Since 23 is less than 24, the claim is likely valid only if the waiting period calculation is wrong; otherwise, it is not contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Calculation of months continuous coverage\",\n    \"Proof that 24 months has not elapsed\",\n    \"Clarification on policy inception date\",\n    \"Details of any continuous cover ported\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0049",
+   "scenario": "treatment_protocol",
+   "gold_category": "other",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-04-22\",\n    \"admission_date\": \"2025-02-04\",\n    \"months_continuous_coverage\": 36,\n    \"condition_named_by_insurer\": \"typhoid fever\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 30,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer claims the treatment duration and type don't match typhoid protocols. Since the stay length isn't specified as 24+ hours and the treatment isn't listed as a day care procedure, the rejection stands unless the hospital stay was actually very short.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"The specific standard treatment protocol for typhoid\",\n    \"The exact duration of the hospital stay in hours\",\n    \"Whether the treatment falls under the day care list\",\n    \"Evidence that the treatment was unnecessary\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0050",
+   "scenario": "daycare",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-10-25\",\n    \"admission_date\": \"2024-02-04\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 6,\n    \"is_listed_daycare_procedure\": true,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The policy explicitly lists coronary angiography as a day care procedure requiring less than 24 hours. The claim letter admits the stay was only 6 hours, yet rejected it as non-hospitalisation. This contradicts the policy wording.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Clarification on why a listed day care procedure requires hospitalisation\",\n    \"Copy of the policy schedule showing the day care list\",\n    \"Explanation of the 6-hour stay classification\",\n    \"Reconsideration of the claim based on policy wording\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0051",
+   "scenario": "daycare",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-06-08\",\n    \"admission_date\": \"2026-03-01\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"osteoarthritis\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": 17,\n    \"is_listed_daycare_procedure\": true,\n    \"room_rent_limit_per_day\": 4000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The surgery is listed as a day care procedure in the policy, but the patient stayed 17 hours. However, the insurer rejected it because hospitalization was 'not medically necessary' for an elective procedure. Since the stay was under 24 hours, the day care clause applies, and the rejection based on lack of medical necessity is contestable if the surgery was medically required despite being elective.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding medical necessity for elective procedures\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Medical justification for why the arthroscopic knee surgery could not be done on an OPD basis\",\n    \"Clarification on whether the 17-hour stay qualifies as a day care procedure under the policy\",\n    \"Evidence that the procedure was not medically necessary given the patient's condition\",\n    \"Reconsideration of the claim if the surgery was deemed medically essential\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0052",
+   "scenario": "over_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-04-18\",\n    \"admission_date\": \"2025-11-25\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 72,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": 5500,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer deducted room rent because the charged rate (Rs. 5,500) exceeded the policy limit (Rs. 3,000). However, the insured has 60 months of continuous coverage, which waives the initial waiting period and typically allows full room rent coverage for non-pre-existing conditions.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on for room rent proportionate deduction\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Explanation of why continuous coverage of 60 months does not override the room rent limit\",\n    \"Clarification on whether the room category was deemed pre-existing\",\n    \"Reconsideration of the claim with full room rent coverage\",\n    \"Confirmation that no other exclusions apply to this claim\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0053",
+   "scenario": "not_served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2024-07-18\",\n    \"admission_date\": \"2026-06-21\",\n    \"months_continuous_coverage\": 23,\n    \"condition_named_by_insurer\": \"cataract\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"specific disease waiting period\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for cataract, which has a 24-month waiting period. You have only completed 23 months of continuous coverage since July 2024. The insurer's rejection is based on this valid waiting period rule.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0054",
+   "scenario": "late_intimation",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "worth_asking",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-03-16\",\n    \"admission_date\": \"2026-04-26\",\n    \"months_continuous_coverage\": 36,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"worth_asking\",\n  \"reason\": \"The insurer rejected the claim due to late intimation (19 days). However, the policy excerpt does not specify the required intimation period, making it impossible to verify if the rejection is valid based on the provided documents.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause requiring intimation within 24 hours\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0055",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-11-12\",\n    \"admission_date\": \"2024-10-28\",\n    \"months_continuous_coverage\": 5,\n    \"condition_named_by_insurer\": \"epilepsy\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites non-disclosure of a pre-existing disease (epilepsy) which is directly related to the claim. The policy requires a 36-month waiting period for pre-existing diseases, but the insured has only had continuous cover for 5 months. This meets the insurer's grounds for rejection.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0056",
+   "scenario": "over_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-02-15\",\n    \"admission_date\": \"2021-07-07\",\n    \"months_continuous_coverage\": 23,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 72,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 6000,\n    \"room_rent_charged_per_day\": 11000,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer deducted room rent because the charged rate (Rs 11,000) exceeded the policy limit (Rs 6,000). This is a standard proportionate deduction and is not contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0057",
+   "scenario": "unrelated",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-05-02\",\n    \"admission_date\": \"2026-01-16\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"Coronary Artery Disease (CAD)\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"Non-disclosure of pre-existing disease\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": 96,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The claim is for cataract surgery, unrelated to the alleged pre-existing CAD. The insured has 60 months of continuous coverage, meeting the 60-month moratorium rule which waives the pre-existing disease waiting period and non-disclosure penalties for unrelated conditions.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding the 60-month moratorium\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0058",
+   "scenario": "in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-09-21\",\n    \"admission_date\": \"2025-11-12\",\n    \"months_continuous_coverage\": 25,\n    \"condition_named_by_insurer\": \"Obesity and weight control treatment\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"Obesity and weight control treatment\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 5000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer correctly cites a permanent exclusion for obesity treatment found in your policy. Since this exclusion is explicitly in the policy wording, the rejection is valid regardless of waiting periods or continuous coverage.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0059",
+   "scenario": "investigation",
+   "gold_category": "other",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-01-04\",\n    \"admission_date\": \"2026-09-05\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The rejection cites missing or inconsistent hospital documents. This is a procedural issue, not a coverage denial based on policy terms. You can request the specific documents and a formal explanation for the discrepancy.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"List of missing documents required\",\n    \"Explanation of the discrepancy between case papers and billing\",\n    \"Timeline for document submission\",\n    \"Confirmation of claim status upon document receipt\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0060",
+   "scenario": "not_in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-01-12\",\n    \"admission_date\": \"2026-06-14\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"sleep apnoea\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"sleep apnoea devices and other external aids\",\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites a permanent exclusion for sleep apnoea devices. This specific exclusion does not appear in the provided policy schedule, which lists different exclusions. However, without the full policy document, we cannot confirm if this exclusion exists elsewhere. Since the exact clause is missing from the excerpt, the rejection is likely valid based on available info, but worth asking for the specific clause.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0061",
+   "scenario": "served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-08-06\",\n    \"admission_date\": \"2023-09-06\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": \"cataract\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The cataract treatment occurred exactly 24 months after the policy started. Since the specific disease waiting period is also 24 months, the claim falls within the exclusion period and is not contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0062",
+   "scenario": "late_intimation",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-05-09\",\n    \"admission_date\": \"2025-11-16\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer rejected the claim due to late intimation (19 days after admission). However, the policy excerpt does not mention any specific time limit for intimation, making the rejection ground unsupported by the provided document.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding intimation time\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0063",
+   "scenario": "lapsed",
+   "gold_category": "policy_lapsed",
+   "pred_category": "policy_lapsed",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"policy_lapsed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-06-01\",\n    \"admission_date\": \"2025-07-13\",\n    \"months_continuous_coverage\": 13,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 4000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": false,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy lapsed because the renewal premium was not paid within the 30-day grace period after June 1, 2025. The admission date was July 13, 2025, which is outside the coverage period. This is a clear case of non-payment leading to lapse.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0064",
+   "scenario": "missing_documents",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-10-06\",\n    \"admission_date\": \"2026-02-11\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The rejection is based on missing documents, which is contestable. The policy has been in force for 60 months, well past the 48-month pre-existing disease waiting period. The insurer cannot deny the claim solely for document delays when the coverage period is sufficient.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"List of required documents for submission\",\n    \"Timeline for document submission\",\n    \"Confirmation that the claim is not barred by waiting period\",\n    \"Clarification on document submission deadline\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0065",
+   "scenario": "not_served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2022-02-15\",\n    \"admission_date\": \"2023-12-27\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": \"gall bladder stones\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The treatment for gall bladder stones falls within the 24-month specific disease waiting period. Since the policy inception was 24 months prior to admission, the waiting period has not been satisfied.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0066",
+   "scenario": "lapsed",
+   "gold_category": "policy_lapsed",
+   "pred_category": "policy_lapsed",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"policy_lapsed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-01-07\",\n    \"admission_date\": \"2025-01-11\",\n    \"months_continuous_coverage\": 0,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": false,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy lapsed because the renewal premium was not paid within the 30-day grace period after the due date. Since the policy was not in force on the admission date, the claim is validly rejected.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0067",
+   "scenario": "over_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-07-08\",\n    \"admission_date\": \"2026-07-10\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 96,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 4000,\n    \"room_rent_charged_per_day\": 5000,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer deducted room rent because the charged rate (INR 5,000) exceeded the policy limit (INR 4,000). However, the insured has 60 months of continuous coverage, which typically waives such proportionate deductions for room rent under Indian insurance law and standard practice.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on for the room rent deduction\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Clarification on why continuous coverage does not waive room rent proportionate deduction\",\n    \"Reference to specific judicial precedents or policy wording supporting the deduction\",\n    \"Request to review the claim without the room rent proportionate deduction\",\n    \"Confirmation of the actual room rent limit applicable to this specific hospital\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0068",
+   "scenario": "accident_exempt",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-04-12\",\n    \"admission_date\": \"2022-03-12\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": \"joint replacement surgeries\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 2,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": true,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 4000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The claim is for an accident, and the policy explicitly states waiting periods do not apply to accidents. The insurer incorrectly applied the 24-month specific disease waiting period despite the clear accident exemption in the policy wording.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0069",
+   "scenario": "not_served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-05-14\",\n    \"admission_date\": \"2025-03-28\",\n    \"months_continuous_coverage\": 36,\n    \"condition_named_by_insurer\": \"chronic hepatitis B\",\n    \"ped_disclosed_in_proposal\": true,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 4,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for liver cirrhosis, which is not the declared pre-existing disease (hepatitis B). However, the insurer cites a 48-month waiting period for pre-existing conditions. With only 36 months of continuous coverage, the claim falls within this period, making the rejection valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0070",
+   "scenario": "in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-12-21\",\n    \"admission_date\": \"2025-05-06\",\n    \"months_continuous_coverage\": 5,\n    \"condition_named_by_insurer\": \"refractive error below 7.5 dioptres\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"correction of refractive error below 7.5 dioptres\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy explicitly excludes LASIK for refractive errors below 7.5 dioptres, and the insurer cites this exact clause. Since the exclusion is in the policy wording, the rejection is valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0071",
+   "scenario": "missing_documents",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-09-11\",\n    \"admission_date\": \"2026-05-20\",\n    \"months_continuous_coverage\": 59,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The rejection is based on missing documents, not medical grounds. While the waiting period is long, the insurer cannot deny a claim solely for document delays if the claim is valid. You can contest by submitting the missing papers immediately.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause requiring these specific documents\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"A timeline for document submission to avoid further delay\",\n    \"Confirmation that the claim is not rejected due to waiting period\",\n    \"Confirmation that the claim is not rejected due to non-disclosure\",\n    \"Confirmation that the claim is not rejected due to permanent exclusion\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0072",
+   "scenario": "restore_unknown",
+   "gold_category": "sum_insured_exhausted",
+   "pred_category": "sum_insured_exhausted",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"sum_insured_exhausted\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-11-03\",\n    \"admission_date\": \"2022-12-12\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 72,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer states the Sum Insured of ₹10,00,000 is fully exhausted by earlier claims in the current year. Unless there is a specific 'restore benefit' clause not mentioned in the letter or policy, this is a valid reason for rejection.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"List of earlier claims settled in the current policy year\",\n    \"Details of any unused restore benefit available\",\n    \"Breakdown of total claims paid vs Sum Insured limit\",\n    \"Policy wording regarding Sum Insured exhaustion\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0073",
+   "scenario": "accident_wording_unknown",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-02-22\",\n    \"admission_date\": \"2021-11-27\",\n    \"months_continuous_coverage\": 11,\n    \"condition_named_by_insurer\": \"intervertebral disc prolapse\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The condition (spinal disc surgery) falls under the 24-month specific disease waiting period. You have only completed 11 months of continuous coverage since the policy started, which is less than the required 24 months.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0074",
+   "scenario": "wording_unknown",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-11-03\",\n    \"admission_date\": \"2025-11-08\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"cosmetic or plastic surgery\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"cosmetic or plastic surgery\",\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites a permanent exclusion for cosmetic surgery, which is not explicitly listed in the provided policy excerpt. Without seeing the full policy, we cannot confirm if this exclusion applies. However, since the exclusion is not in the excerpt, the rejection is likely valid unless the full policy contradicts the letter.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"A copy of the full policy schedule showing the exclusion\",\n    \"Clarification on whether cosmetic procedures are covered under any specific conditions\",\n    \"Details on the medical necessity assessment for the rhinoplasty\",\n    \"Information on any available restore benefits for this policy year\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0075",
+   "scenario": "within_grace",
+   "gold_category": "policy_lapsed",
+   "pred_category": "policy_lapsed",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"policy_lapsed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-05-14\",\n    \"admission_date\": \"2023-07-26\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": true,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The policy had continuous cover for 24 months, well beyond the 30-day grace period. The insurer incorrectly claimed the policy was lapsed because the premium was paid after the due date, but the grace period covers this delay.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Proof that the premium was not received within the 30-day grace period\",\n    \"Explanation of how continuous cover was interrupted\",\n    \"Correction of the policy status based on grace period rules\",\n    \"Reinstatement of the claim for the admitted period\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0076",
+   "scenario": "within_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2024-12-02\",\n    \"admission_date\": \"2026-07-02\",\n    \"months_continuous_coverage\": 17,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 168,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": 7500,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The charged room rate of Rs 7,500 matches the policy limit exactly. No deduction is justified as the room was not above the entitlement.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0077",
+   "scenario": "missing_documents",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-11-30\",\n    \"admission_date\": \"2022-07-20\",\n    \"months_continuous_coverage\": 25,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The rejection is based on missing documents, not medical grounds. Since the Claims Review Committee approved the decision, you can contest by proving the documents were submitted within the insurer's grace period or that the delay was due to their own process.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Proof that the missing documents were not received within the grace period\",\n    \"Written confirmation of the specific deadline for document submission\",\n    \"Details of the reminders sent and their dates\",\n    \"Clarification on whether the delay was caused by the insured or insurer\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0078",
+   "scenario": "served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-01-18\",\n    \"admission_date\": \"2024-03-08\",\n    \"months_continuous_coverage\": 48,\n    \"condition_named_by_insurer\": \"Type 2 diabetes mellitus\",\n    \"ped_disclosed_in_proposal\": true,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": true,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for a pre-existing disease (Type 2 diabetes) with a 48-month waiting period. You have exactly 48 months of continuous coverage, which does not meet the requirement to contest this specific rejection.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0079",
+   "scenario": "disclosed",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-06-02\",\n    \"admission_date\": \"2025-12-27\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"chronic kidney disease\",\n    \"ped_disclosed_in_proposal\": true,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer rejected due to non-disclosure of a pre-existing disease. However, the policy explicitly states this condition was declared in the proposal form. Additionally, the insured has completed 60 months of continuous coverage, which legally bars pre-existing disease exclusions under Indian law.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Evidence that the condition was not declared in the proposal form\",\n    \"Explanation of how 60 months of continuous coverage is ignored\",\n    \"Clarification on the specific disease waiting period applicability\",\n    \"Request for reconsideration based on non-disclosure rebuttal\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0080",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-04-05\",\n    \"admission_date\": \"2023-11-20\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"Chronic Kidney Disease\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer rejected due to non-disclosure of a pre-existing disease. However, the policy shows continuous coverage for exactly 60 months (5 years) since inception. Under Indian insurance law, a 60-month continuous cover moratorium protects against pre-existing disease exclusions, making this rejection contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding non-disclosure\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Explanation of how the 60-month continuous cover moratorium was ignored\",\n    \"Clarification on whether the disease was actually disclosed in the proposal\",\n    \"Request for reconsideration based on Section 45 of the IRDAI Act\",\n    \"Details of the specific pre-existing condition history cited\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0081",
+   "scenario": "accident_not_exempt",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-06-10\",\n    \"admission_date\": \"2023-04-18\",\n    \"months_continuous_coverage\": 25,\n    \"condition_named_by_insurer\": \"intervertebral disc prolapse\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The claim is contestable because the patient has 25 months of continuous coverage, exceeding the 24-month specific disease waiting period. Although the treatment followed an accident, the policy explicitly states that specific disease waiting periods apply regardless of the cause of injury.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0082",
+   "scenario": "late_submission",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "worth_asking",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-09-22\",\n    \"admission_date\": \"2025-10-25\",\n    \"months_continuous_coverage\": 48,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"worth_asking\",\n  \"reason\": \"The insurer rejected the claim due to late document submission (104 days vs 30 days required). While the policy explicitly states this requirement, contesting is uncertain without knowing if the delay was due to insurer negligence or if the claim amount is small enough to waive the penalty. Continuous cover is sufficient for waiting periods, but the document delay is the specific ground.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding the 30-day submission limit\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Whether the late submission was due to insurer's delay in processing documents\",\n    \"If the claim amount qualifies for an exception to the submission deadline\",\n    \"Clarification on whether the delay was caused by the insured or the hospital\",\n    \"Details on any potential waiver for administrative delays in document collection\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0083",
+   "scenario": "within_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-02-21\",\n    \"admission_date\": \"2024-10-28\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 72,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": 7500,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer deducted room rent because the charge matched the policy limit, but the claim is for dengue, not a pre-existing condition. With 60 months of continuous coverage, the 36-month pre-existing waiting period has passed, making the rejection invalid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Clarification on why the 36-month pre-existing waiting period does not apply to dengue\",\n    \"Evidence that the room rent charged exceeds the policy limit\",\n    \"Explanation of the deduction calculation\",\n    \"Request for full claim settlement without room rent deduction\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0084",
+   "scenario": "within_grace",
+   "gold_category": "policy_lapsed",
+   "pred_category": "policy_lapsed",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"policy_lapsed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-01-23\",\n    \"admission_date\": \"2026-02-04\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": false,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy lapsed because the renewal premium was paid on 28/01/2026, which is 5 days after the 15-day grace period ended on 08/01/2026. Since the premium was not received within the grace period, the policy was not in force at the time of admission.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0085",
+   "scenario": "disclosed",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-07-06\",\n    \"admission_date\": \"2026-02-22\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"coronary artery disease\",\n    \"ped_disclosed_in_proposal\": true,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer correctly identified that coronary artery disease was declared in the proposal form. Since the claim is for cataract surgery (unrelated to the declared disease) and the policy shows disclosure, the non-disclosure ground is invalid. The rejection is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0086",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-12-15\",\n    \"admission_date\": \"2024-07-22\",\n    \"months_continuous_coverage\": 5,\n    \"condition_named_by_insurer\": \"Chronic Hepatitis B\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 3,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": \"Non-disclosure of pre-existing disease\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": 6,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for a pre-existing condition (Hepatitis B) that was not declared. The policy has a 36-month waiting period for such conditions, and only 5 months of continuous coverage exist. The insurer's rejection is fully supported by the policy terms.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0087",
+   "scenario": "over_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-06-24\",\n    \"admission_date\": \"2026-02-02\",\n    \"months_continuous_coverage\": 59,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 72,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 6000,\n    \"room_rent_charged_per_day\": 11000,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer deducted room rent because the charged rate (INR 11,000) exceeds the policy limit (INR 6,000). This is a standard proportionate deduction for room category excess, which is not contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0088",
+   "scenario": "restore_unused",
+   "gold_category": "sum_insured_exhausted",
+   "pred_category": "sum_insured_exhausted",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "worth_asking",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"sum_insured_exhausted\",\n  \"facts\": {\n    \"policy_inception_date\": \"2022-10-15\",\n    \"admission_date\": \"2026-04-16\",\n    \"months_continuous_coverage\": 36,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": true,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"worth_asking\",\n  \"reason\": \"The insurer claims the sum insured is exhausted, but the policy explicitly states a restore benefit is available and unused. This makes the rejection contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Proof that the sum insured was fully exhausted by earlier claims\",\n    \"Details of the earlier claims that exhausted the sum insured\",\n    \"Confirmation that the restore benefit has not been utilized\",\n    \"Explanation of how the restore benefit can be applied to this claim\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0089",
+   "scenario": "exhausted",
+   "gold_category": "sum_insured_exhausted",
+   "pred_category": "sum_insured_exhausted",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"sum_insured_exhausted\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-06-24\",\n    \"admission_date\": \"2025-08-04\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": false,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy explicitly states the restore benefit was already used this year, so no extra coverage remains. The sum insured is fully exhausted, making the rejection valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0090",
+   "scenario": "missing_documents",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2025-04-04\",\n    \"admission_date\": \"2026-07-21\",\n    \"months_continuous_coverage\": 15,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The rejection is based solely on missing documents. The insurer must provide the specific documents required and allow time for submission. You can contest by requesting the exact list of missing documents and a deadline for resubmission.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"A complete list of missing documents\",\n    \"A deadline for resubmission of documents\",\n    \"Confirmation that the claim was not rejected due to other grounds\",\n    \"Written confirmation of the documents required for verification\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0091",
+   "scenario": "accident_initial",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2024-01-01\",\n    \"admission_date\": \"2024-01-08\",\n    \"months_continuous_coverage\": 0,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 1,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The injury happened on January 8th, just 7 days after the policy started on January 1st. Since this is an accident and the policy does not exempt accidents from the waiting period, the claim falls within the 30-day initial waiting period.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0092",
+   "scenario": "accident_exempt",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2024-06-19\",\n    \"admission_date\": \"2026-06-10\",\n    \"months_continuous_coverage\": 24,\n    \"condition_named_by_insurer\": \"joint replacement\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": true,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The claim is for an accident (fracture), but the insurer incorrectly applied a 24-month waiting period. The policy explicitly states waiting periods do not apply to accidents. With 24 months of continuous coverage, the claim is valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0093",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-03-05\",\n    \"admission_date\": \"2025-01-24\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"chronic hepatitis B\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"48-month exclusion period for pre-existing diseases\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The policy has continuous cover for 60 months, which meets the 60-month moratorium rule. Even though the pre-existing disease was not declared, the long continuous coverage period makes the rejection contestable under standard Indian health insurance practices.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding the 60-month moratorium\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Clarification on how the 60-month continuous cover is calculated\",\n    \"Explanation of why the moratorium rule does not apply here\",\n    \"Request for reconsideration based on continuous cover duration\",\n    \"Details of any alternative settlement options available\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0094",
+   "scenario": "missing_documents",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-02-15\",\n    \"admission_date\": \"2020-01-11\",\n    \"months_continuous_coverage\": 11,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The rejection is based solely on missing documents. The insurer must provide the specific documents requested to justify the rejection. Without them, the claim cannot be closed, and the insurer should be asked to provide the missing items.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"List of required documents for the claim\",\n    \"Timeline for submission of missing documents\",\n    \"Confirmation that the claim is not closed pending documents\",\n    \"Copy of the proposal form regarding pre-existing conditions\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0095",
+   "scenario": "not_served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-08-19\",\n    \"admission_date\": \"2022-07-28\",\n    \"months_continuous_coverage\": 23,\n    \"condition_named_by_insurer\": \"chronic sinusitis\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": true,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for chronic sinusitis, which has a 24-month waiting period. You have only completed 23 months of continuous coverage since August 2020. Since this is an illness, not an accident, the exemption for accidents does not apply. The rejection is valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0096",
+   "scenario": "exhausted",
+   "gold_category": "sum_insured_exhausted",
+   "pred_category": "sum_insured_exhausted",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"sum_insured_exhausted\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-12-10\",\n    \"admission_date\": \"2023-04-22\",\n    \"months_continuous_coverage\": 36,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": false,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy explicitly states the Sum Insured of INR 5,00,000 is an aggregate for the policy year. The insurer claims this limit was fully exhausted by prior claims. Since no restore benefit was opted, and the total sum insured is gone, the rejection is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"List of prior claims settled in this policy year\",\n    \"Total amount paid out in this policy year\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0097",
+   "scenario": "within_grace",
+   "gold_category": "policy_lapsed",
+   "pred_category": "policy_lapsed",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"policy_lapsed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2022-12-28\",\n    \"admission_date\": \"2024-03-11\",\n    \"months_continuous_coverage\": 15,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 5000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": false,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy lapsed because the renewal premium was paid after the 30-day grace period ended. Since the premium was received on 05-Jan-2024, which is outside the grace period, coverage was not active at admission.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0098",
+   "scenario": "not_served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-05-03\",\n    \"admission_date\": \"2020-05-24\",\n    \"months_continuous_coverage\": 1,\n    \"condition_named_by_insurer\": \"typhoid fever\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 1,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The admission date is exactly 31 days after the policy start date. The insurer cites a 30-day waiting period, which has technically passed, but the claim is for a specific disease (typhoid) which usually has a longer waiting period. Without knowing if the disease was pre-existing or if the 30-day rule applies specifically to typhoid, the rejection seems valid based on the provided text.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0099",
+   "scenario": "in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-05-10\",\n    \"admission_date\": \"2025-10-24\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"Correction of refractive error below 7.5 dioptres\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"Correction of refractive error below 7.5 dioptres\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy explicitly excludes refractive error correction below 7.5 dioptres. Even though the surgery was after the waiting period, the permanent exclusion applies regardless of coverage duration.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0100",
+   "scenario": "accident_exempt",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-08-08\",\n    \"admission_date\": \"2025-07-15\",\n    \"months_continuous_coverage\": 25,\n    \"condition_named_by_insurer\": \"cataract\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": true,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The claim is for an accident, and the policy explicitly states waiting periods do not apply to accidents. The insurer incorrectly applied the 24-month specific disease waiting period to an accident claim.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0101",
+   "scenario": "accident_not_exempt",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2024-11-16\",\n    \"admission_date\": \"2026-09-17\",\n    \"months_continuous_coverage\": 23,\n    \"condition_named_by_insurer\": \"cataract\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 24,\n    \"is_accident\": true,\n    \"accident_exempt_in_wording\": true,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim falls within the 24-month specific disease waiting period for cataract, even though it was caused by an accident. The policy explicitly states that specific disease waiting periods are not waived for accidents.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0102",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-04-02\",\n    \"admission_date\": \"2024-11-15\",\n    \"months_continuous_coverage\": 48,\n    \"condition_named_by_insurer\": \"hypertension\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": \"non_disclosure of pre-existing disease\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer correctly cites non-disclosure of hypertension, a pre-existing condition, which is medically related to the claim. The policy requires a 36-month waiting period for such conditions, and the insured has only completed 48 months of continuous coverage since 2020, which is less than the required 36 months from the current policy start date.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding non-disclosure\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0103",
+   "scenario": "unrelated",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2021-07-04\",\n    \"admission_date\": \"2026-04-20\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"bronchial asthma\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer rejected due to non-disclosure of asthma, but the policy covers continuous cover since 2021. The insured has completed 60 months, exceeding the 48-month pre-existing disease waiting period. This makes the rejection contestable under Indian law.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Clarification on how the 48-month waiting period was calculated\",\n    \"Evidence that the proposal form explicitly excluded asthma\",\n    \"Legal basis for denying a claim after 60 months of continuous cover\",\n    \"Correction of the rejection if the waiting period has expired\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0104",
+   "scenario": "within_limit",
+   "gold_category": "room_rent_proportionate",
+   "pred_category": "room_rent_proportionate",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"room_rent_proportionate\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-06-12\",\n    \"admission_date\": \"2019-08-14\",\n    \"months_continuous_coverage\": 2,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 192,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer deducted room rent because the charged amount exceeded the policy limit of ₹7,500/day. Without knowing the actual charged amount, we cannot confirm if the deduction is valid. However, the claim is for acute gastroenteritis, which is not an accident, and the patient has only 2 months of continuous coverage, so waiting period issues do not apply here.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation of the room rent charged per day\",\n    \"Calculation of the proportionate deduction\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0105",
+   "scenario": "late_intimation",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-03-26\",\n    \"admission_date\": \"2025-10-28\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"kidney stones (urolithiasis)\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The claim is contestable because the policyholder has 60 months of continuous coverage, which typically waives the late intimation penalty for emergency admissions under Indian insurance law and standard moratoriums.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding late intimation\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Explanation of how the 60-month continuous cover waives the 48-hour intimation rule\",\n    \"Reference to applicable moratorium provisions in the policy\",\n    \"Clarification on whether the admission qualifies as an emergency under the policy\",\n    \"Reconsideration of the claim based on continuous cover status\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0106",
+   "scenario": "disclosed",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-11-18\",\n    \"admission_date\": \"2024-10-10\",\n    \"months_continuous_coverage\": 59,\n    \"condition_named_by_insurer\": \"chronic hepatitis B\",\n    \"ped_disclosed_in_proposal\": true,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": \"non-disclosure of pre-existing disease\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The disease was disclosed in the proposal, but the continuous cover is only 59 months, which is less than the 36-month waiting period for pre-existing diseases. The claim is not contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0107",
+   "scenario": "wording_unknown",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-08-30\",\n    \"admission_date\": \"2023-03-15\",\n    \"months_continuous_coverage\": 48,\n    \"condition_named_by_insurer\": \"cosmetic or plastic surgery\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"cosmetic or plastic surgery procedures are permanently excluded\",\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites a permanent exclusion for cosmetic surgery, which is not found in the provided policy excerpt. Without seeing the full policy wording, we cannot confirm if this exclusion exists. However, since the specific clause is missing from the documents, the rejection is likely valid based on available evidence.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0108",
+   "scenario": "not_served",
+   "gold_category": "waiting_period",
+   "pred_category": "waiting_period",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"waiting_period\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-01-17\",\n    \"admission_date\": \"2020-12-11\",\n    \"months_continuous_coverage\": 23,\n    \"condition_named_by_insurer\": \"chronic hepatitis B\",\n    \"ped_disclosed_in_proposal\": true,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for a pre-existing condition (liver cirrhosis related to hepatitis B) which was disclosed. The policy requires a 36-month waiting period for such conditions, but only 23 months have passed since the policy started. The claim falls within the waiting period.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0109",
+   "scenario": "valid",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-11-11\",\n    \"admission_date\": \"2025-10-25\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"Type 2 diabetes mellitus\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": 48,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The claim is for a pre-existing condition (diabetes) not declared in the proposal. Although 60 months of continuous cover exists, the insurer's 48-month waiting period for pre-existing diseases has not expired, making the rejection valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0110",
+   "scenario": "copay_dispute",
+   "gold_category": "other",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-10-20\",\n    \"admission_date\": \"2025-03-20\",\n    \"months_continuous_coverage\": 59,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 7500,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The rejection cites non-acceptance of co-payment and zone deductions, not a policy exclusion or waiting period. Since the insurer did not deny coverage based on a specific clause but rather a financial deduction dispute, the claim is contestable by requesting the exact policy clause for these deductions and clarifying the settlement logic.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on for co-payment and zone-based deductions\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Breakdown of the rejected co-payment amount\",\n    \"Explanation of why the full claim amount cannot be settled with statutory deductions\",\n    \"Clarification on whether the claim is closed due to policy terms or administrative reasons\",\n    \"Request for a meeting with the grievance cell to discuss the settlement\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0111",
+   "scenario": "late_submission",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "worth_asking",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-05-06\",\n    \"admission_date\": \"2020-12-16\",\n    \"months_continuous_coverage\": 7,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"worth_asking\",\n  \"reason\": \"The insurer rejected the claim due to late document submission (99 days after discharge). While the policy requires submission within 30 days, this is a procedural issue. Without knowing if the documents were actually late or if there are exceptions, it is unclear if the rejection is valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause requiring submission within 30 days of discharge\",\n    \"Confirmation that the documents were indeed submitted after the 30-day deadline\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0112",
+   "scenario": "disclosure_unknown",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-02-20\",\n    \"admission_date\": \"2024-01-06\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"coronary artery disease\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": false,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": false,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 4000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites a pre-existing condition (coronary artery disease) not disclosed. Although 60 months of continuous cover exists, the condition is unrelated to the cataract surgery claim. Non-disclosure of an unrelated disease typically does not invalidate a claim for a different condition.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on regarding non-disclosure of unrelated pre-existing conditions\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0113",
+   "scenario": "long_stay",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-05-29\",\n    \"admission_date\": \"2024-11-12\",\n    \"months_continuous_coverage\": 11,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 48,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The hospital stay was 48 hours, which meets the 24-hour threshold for contesting an OPD rejection. The policy does not explicitly list day care procedures, so the claim for inpatient treatment may be valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"List of day care procedures in the policy\",\n    \"Medical justification for OPD treatment\",\n    \"Evidence of 24-hour hospital stay\",\n    \"Clarification on hospitalisation requirements\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0114",
+   "scenario": "moratorium",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-07-01\",\n    \"admission_date\": \"2025-09-06\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"Type 2 diabetes mellitus\",\n    \"ped_disclosed_in_proposal\": false,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The insurer cites non-disclosure of a pre-existing disease (diabetes). Although you have 60 months of continuous cover, the waiting period for pre-existing diseases is 36 months. Since the disease is unrelated to the claim (appendicitis), the rejection stands.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0115",
+   "scenario": "in_wording",
+   "gold_category": "permanent_exclusion",
+   "pred_category": "permanent_exclusion",
+   "gold_verdict": "likely_valid",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"permanent_exclusion\",\n  \"facts\": {\n    \"policy_inception_date\": \"2020-01-07\",\n    \"admission_date\": \"2026-03-26\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"Cosmetic or plastic surgery\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": true,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": \"Cosmetic or plastic surgery\",\n    \"exclusion_in_policy_wording\": true,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The policy explicitly lists 'Cosmetic or plastic surgery' as a permanent exclusion. Even though the insured has 60 months of continuous coverage, permanent exclusions generally apply regardless of the waiting period. The claim is likely valid only if the procedure was medically necessary, not cosmetic.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Medical necessity report for the rhinoplasty\",\n    \"Clarification on whether the procedure was deemed cosmetic or reconstructive\",\n    \"List of all permanent exclusions in the policy\",\n    \"Details of any exceptions for reconstructive surgery\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0116",
+   "scenario": "missing_documents",
+   "gold_category": "documents_or_late_intimation",
+   "pred_category": "documents_or_late_intimation",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"documents_or_late_intimation\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-11-22\",\n    \"admission_date\": \"2024-09-25\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": 3000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": true\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The rejection is based on missing documents, which is contestable. The insurer has already approved the claim by the Claims Review Committee, but the policy requires these documents for verification. Providing them should allow reassessment.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause requiring the attending doctor's certificate\",\n    \"The exact policy clause requiring KYC documents of the proposer\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"A timeline for document submission and reassessment\",\n    \"Clarification on whether the claim can be processed without these documents\",\n    \"Confirmation of the current status of the claim\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0117",
+   "scenario": "long_stay",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "worth_asking",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2023-04-15\",\n    \"admission_date\": \"2024-06-25\",\n    \"months_continuous_coverage\": 11,\n    \"condition_named_by_insurer\": \"wheezing\",\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": 30,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 24,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"worth_asking\",\n  \"reason\": \"The stay was exactly 24 hours, which is the threshold for day care procedures. Since the policy lists specific day care procedures and wheezing nebulisation isn't listed, the decision is borderline. More data is needed to confirm if this is contestable.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"List of all day care procedures covered under the policy\",\n    \"Medical justification for why the 24-hour stay was not sufficient for day care status\",\n    \"Details of the specific day care procedure the treatment was compared to\",\n    \"Clarification on whether the treatment falls under any specific disease waiting period\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0118",
+   "scenario": "disclosed",
+   "gold_category": "non_disclosure_ped",
+   "pred_category": "non_disclosure_ped",
+   "gold_verdict": "likely_contestable",
+   "pred_verdict": "likely_contestable",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"non_disclosure_ped\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-06-23\",\n    \"admission_date\": \"2024-01-28\",\n    \"months_continuous_coverage\": 60,\n    \"condition_named_by_insurer\": \"epilepsy\",\n    \"ped_disclosed_in_proposal\": true,\n    \"condition_related_to_claim\": false,\n    \"waiting_period_months\": 36,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": null,\n    \"is_listed_daycare_procedure\": null,\n    \"room_rent_limit_per_day\": null,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_contestable\",\n  \"reason\": \"The insurer claims non-disclosure of epilepsy, but the policy shows it was declared. More importantly, the insured has 60 months of continuous coverage, which meets the 60-month moratorium rule for contesting pre-existing disease rejections.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause relied on\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\",\n    \"Explanation of how the 60-month moratorium was ignored\",\n    \"Evidence that epilepsy was not declared in the proposal form\",\n    \"Clarification on the relationship between epilepsy and gastroenteritis\",\n    \"Details of the specific pre-existing disease waiting period applied\"\n  ]\n}"
+  },
+  {
+   "case_id": "eval_synth-0119",
+   "scenario": "short_stay",
+   "gold_category": "no_hospitalisation_needed",
+   "pred_category": "no_hospitalisation_needed",
+   "gold_verdict": "worth_asking",
+   "pred_verdict": "likely_valid",
+   "parse_error": null,
+   "raw": "{\n  \"category\": \"no_hospitalisation_needed\",\n  \"facts\": {\n    \"policy_inception_date\": \"2019-02-05\",\n    \"admission_date\": \"2022-07-17\",\n    \"months_continuous_coverage\": 36,\n    \"condition_named_by_insurer\": null,\n    \"ped_disclosed_in_proposal\": null,\n    \"condition_related_to_claim\": null,\n    \"waiting_period_months\": null,\n    \"is_accident\": false,\n    \"accident_exempt_in_wording\": null,\n    \"exclusion_cited\": null,\n    \"exclusion_in_policy_wording\": null,\n    \"hospital_stay_hours\": 10,\n    \"is_listed_daycare_procedure\": false,\n    \"room_rent_limit_per_day\": 10000,\n    \"room_rent_charged_per_day\": null,\n    \"premium_paid_within_grace\": null,\n    \"restore_benefit_available_unused\": null,\n    \"crc_approval_mentioned\": false\n  },\n  \"verdict\": \"likely_valid\",\n  \"reason\": \"The stay was only 10 hours, which is less than the 24-hour threshold for hospitalization. The policy lists specific day care procedures, and severe migraine management is not among them. Since the treatment duration does not meet the hospitalization criteria, the rejection is likely valid.\",\n  \"ask_insurer_for\": [\n    \"The exact policy clause defining hospitalization duration\",\n    \"Confirmation that the Claims Review Committee approved this repudiation\"\n  ]\n}"
+  }
+ ]
+}

@@ -51,7 +51,7 @@ Built in M2 (need `.[tinker]` and `TINKER_API_KEY`; each prints a token estimate
 .venv/bin/python -m arzi.eval.run_eval --model base --set pilot --rescore   # recompute metrics from saved outputs
 ```
 
-Data generation and training refuse to start if their estimate is above US$5. Not built yet: `arzi.eval.label_real` and `arzi.app.ui` (M5).
+`run_eval` also takes `--sampler-path tinker://... --out-name NAME` to evaluate one checkpoint, and `--thinking` for a reference run. `sft.py` saves a checkpoint at every val eval (every 20 steps), stores the val curve in `train/runs.json` and plots `eval/results/<name>_val_loss.png`. Data generation and training refuse to start if their estimate is above US$5. Not built yet: `arzi.eval.label_real` and `arzi.app.ui` (M5).
 
 `TINKER_API_KEY` lives in `.env` (see `.env.example`). OCR needs system Tesseract.
 

@@ -81,4 +81,5 @@ def compute_metrics(records: list[Record]) -> dict:
         "n_valid": len(valid),
         "n_moratorium_edge": len(edge),
         "fact_accuracy_by_field": {k: _rate(h, t) for k, (h, t) in per_field.items()},
+        "fact_counts_by_field": per_field,
     }

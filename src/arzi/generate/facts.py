@@ -7,6 +7,7 @@ names, insurers and numbers are fictional.
 
 from __future__ import annotations
 
+import calendar
 import random
 from dataclasses import dataclass, field
 from datetime import date, timedelta
@@ -160,8 +161,9 @@ def format_inr(n: int) -> str:
 
 
 def add_months(d: date, n: int) -> date:
+    """Same day of the month n months later, clamped to the month's last day (31 Jan + 1 -> 28 Feb)."""
     y, m = divmod(d.year * 12 + d.month - 1 + n, 12)
-    return date(y, m + 1, min(d.day, 28))
+    return date(y, m + 1, min(d.day, calendar.monthrange(y, m + 1)[1]))
 
 
 def allocate(n: int, weights: list[float], rng: random.Random) -> list[int]:

@@ -14,7 +14,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
 # training, synthetic data generation and eval (cloud, synthetic data only)
-tinker = ["tinker", "tinker-cookbook"]
+tinker = ["tinker", "tinker-cookbook", "matplotlib>=3.8"]
 # local app: document extraction, inference, UI
 app = [
     "gradio>=4.0",

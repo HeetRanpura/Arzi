@@ -72,3 +72,28 @@ def test_empty_denominators_are_none():
     assert m["contestable_recall"] is None and m["false_hope_rate"] is None
     assert m["moratorium_edge_accuracy"] is None and m["fact_accuracy"] is None
     assert compute_metrics([])["verdict_accuracy"] is None
+
+
+def test_report_flags_headline_regressions_and_shows_counts():
+    from arzi.eval.report import regressions, render_summary
+
+    def result(preds):
+        golds = [out(PED, C, months_continuous_coverage=61), out(PED, V, months_continuous_coverage=12), out(WP, W), out(WP, C)]
+        records = [Record(g, p) for g, p in zip(golds, preds)]
+        cases = [
+            {"case_id": f"c{i}", "scenario": "s", "gold_category": r.gold.category.value, "gold_verdict": r.gold.verdict.value, "pred_verdict": r.pred.verdict.value if r.pred else None}
+            for i, r in enumerate(records)
+        ]
+        return {"metrics": compute_metrics(records), "cases": cases}
+
+    base = result([out(PED, C, months_continuous_coverage=61), out(PED, V), out(WP, W), out(WP, C)])
+    worse = result([out(PED, V), out(PED, C), out(WP, W), None])  # lower recall and over-promises
+    assert regressions({"base": base, "ft": base}) == []
+    flags = regressions({"base": base, "ft": worse})
+    assert len(flags) == 2 and all("WORSE" in f for f in flags)
+
+    text = render_summary({"base": base, "ft": worse}, "synth")
+    assert "WARNING" in text and "100.0% (2/2)" in text and "50.0% (1/2)" in text
+    assert "Months-of-cover fact accuracy | 50.0% (1/2) | 0.0% (0/2)" in text
+    assert "| **likely_contestable** | 2 | 0 | 0 | 0 |" in text and "| **likely_contestable** | 0 | 0 | 1 | 1 |" in text
+    assert "| c0 | non_disclosure_ped / s | likely_contestable | likely_contestable | likely_valid |" in text

@@ -70,6 +70,36 @@ def test_eval_styles_are_held_out():
     assert not set(TRAIN_STYLES) & set(EVAL_STYLES)
 
 
+def test_policy_period_keeps_the_inception_day():
+    from datetime import date
+
+    from arzi.generate.facts import add_months
+
+    assert add_months(date(2020, 10, 31), 12) == date(2021, 10, 31)
+    assert add_months(date(2020, 1, 31), 1) == date(2020, 2, 29)
+    assert add_months(date(2021, 3, 30), -1) == date(2021, 2, 28)
+    late = [c for c in CASES if c.facts.policy_inception_date.day > 28 and c.facts.policy_inception_date.month != 2 and c.category is not Category.POLICY_LAPSED]
+    assert late
+    for c in late:
+        day = c.facts.policy_inception_date.day
+        period = next(p for p in c.policy_points if p.startswith("Current policy period"))
+        assert f"{day}" in period.split(" to ")[0]
+
+
+def test_committed_splits_still_match_the_sampler():
+    """The date fix must not change any sampled fact, so cached teacher documents stay valid."""
+    from pathlib import Path
+
+    from arzi.generate.build_dataset import MIN_MORATORIUM_EDGE, SPLITS
+
+    for split, n in SPLITS.items():
+        path = Path(__file__).parent.parent / "data/generated" / f"{split}.jsonl"
+        cases = {c.case_id: c for c in sample_cases(n, 0, split, MIN_MORATORIUM_EDGE.get(split, 0))}
+        for line in path.read_text().splitlines():
+            row = json.loads(line)
+            assert parse_model_output(row["messages"][2]["content"]).facts == cases[row["meta"]["case_id"]].facts
+
+
 def test_allocate_and_inr():
     assert sum(allocate(40, list(CATEGORY_MIX.values()), random.Random(0))) == 40
     assert min(allocate(40, list(CATEGORY_MIX.values()), random.Random(0))) >= 2

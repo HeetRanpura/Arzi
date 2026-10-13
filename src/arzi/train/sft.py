@@ -27,6 +27,7 @@ LOG_ROOT = Path("train/logs")  # gitignored
 MAX_LENGTH = 4096
 PRICE_PER_M_TRAIN_TOKENS = 0.737  # Qwen3.5-4B on Tinker, US$
 MAX_RUN_COST_USD = 5.0
+EVAL_EVERY = 20
 console = Console()
 
 
@@ -40,6 +41,46 @@ def estimate_tokens(path: Path) -> int:
         text = "\n".join(m["content"] for m in json.loads(line)["messages"])
         total += min(len(tokenizer.encode(text)) + 20, MAX_LENGTH)  # + chat template tokens
     return total
+
+
+def val_curve(log_path: Path, steps_per_epoch: int) -> list[dict]:
+    """[{step, val_nll, train_nll, sampler_path}] for every step where val loss was logged."""
+    checkpoints = {}
+    ckpt_file = log_path / "checkpoints.jsonl"
+    if ckpt_file.exists():
+        for line in ckpt_file.read_text().splitlines():
+            record = json.loads(line)
+            # periodic checkpoints are saved at the eval steps; "final" comes after the last batch
+            if record.get("sampler_path") and "batch" in record:
+                checkpoints[record.get("epoch", 0) * steps_per_epoch + record["batch"]] = record["sampler_path"]
+    curve = []
+    for line in (log_path / "metrics.jsonl").read_text().splitlines():
+        m = json.loads(line)
+        val = next((v for k, v in m.items() if k.startswith("val/") and k.endswith("nll")), None)
+        if val is not None:
+            train_nll = next((v for k, v in m.items() if k in ("train_mean_nll", "train/nll", "train_nll")), None)
+            curve.append({"step": m["step"], "val_nll": val, "train_nll": train_nll, "sampler_path": checkpoints.get(m["step"])})
+    return curve
+
+
+def plot_val_loss(curve: list[dict], steps_per_epoch: int, out: Path, title: str) -> None:
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot([c["step"] for c in curve], [c["val_nll"] for c in curve], marker="o", label="val loss (NLL per token)")
+    if all(c["train_nll"] is not None for c in curve):
+        ax.plot([c["step"] for c in curve], [c["train_nll"] for c in curve], marker=".", alpha=0.6, label="train loss at the same step")
+    ax.axvline(steps_per_epoch, color="grey", linestyle="--", linewidth=1, label="start of epoch 2")
+    ax.set_xlabel("training step")
+    ax.set_ylabel("loss")
+    ax.set_title(title)
+    ax.legend()
+    fig.tight_layout()
+    out.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out, dpi=150)
 
 
 def main() -> None:
@@ -101,14 +142,16 @@ def main() -> None:
         num_epochs=args.epochs,
         lora_rank=args.lora_rank,
         evaluator_builders=[val_evaluator],
-        eval_every=20,
-        save_every=50,
+        eval_every=EVAL_EVERY,
+        save_every=EVAL_EVERY,  # a checkpoint at every val eval, so the best-by-val-loss one can be evaluated
     )
     asyncio.run(train.main(config))
 
     last = checkpoint_utils.get_last_checkpoint(str(log_path), required_key="sampler_path")
     if last is None:
         raise SystemExit(f"training finished but no sampler checkpoint was recorded in {log_path}")
+    steps_per_epoch = n_rows // args.batch_size
+    curve = val_curve(log_path, steps_per_epoch)
     runs = json.loads(RUNS_FILE.read_text()) if RUNS_FILE.exists() else []
     runs.append(
         {
@@ -124,11 +167,13 @@ def main() -> None:
             "learning_rate": lr,
             "sampler_path": last.sampler_path,
             "state_path": last.state_path,
+            "val_curve": curve,
         }
     )
     RUNS_FILE.parent.mkdir(exist_ok=True)
     RUNS_FILE.write_text(json.dumps(runs, indent=1) + "\n")
     console.print(f"sampler checkpoint: {last.sampler_path}\nrecorded in {RUNS_FILE}")
+    plot_val_loss(curve, steps_per_epoch, Path(f"eval/results/{args.name}_val_loss.png"), f"Arzi {args.name}: validation loss")
 
 
 if __name__ == "__main__":

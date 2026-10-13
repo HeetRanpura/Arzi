@@ -57,18 +57,20 @@ def score(rows: list[dict], outputs: list[str]) -> dict:
     return {"metrics": compute_metrics(records), "cases": cases}
 
 
-def make_model(service, which: str):
+def make_model(service, which: str, sampler_path: str | None = None, thinking: bool = False):
     from arzi.tinker_client import make_completer, pick_teacher
 
     if which == "teacher":  # large model reference, not the baseline
         name = pick_teacher(service)
         return name, make_completer(service, name, temperature=0.0, max_tokens=MAX_OUTPUT_TOKENS + 2500)
-    path = None
-    if which == "ft":
+    path = sampler_path
+    if which == "ft" and path is None:
         if not RUNS_FILE.exists():
             raise SystemExit(f"{RUNS_FILE} not found: train first (python -m arzi.train.sft)")
         path = json.loads(RUNS_FILE.read_text())[-1]["sampler_path"]
-    completer = make_completer(service, BASE_MODEL, model_path=path, renderer_name=JUDGE_RENDERER, temperature=0.0, max_tokens=MAX_OUTPUT_TOKENS)
+    # thinking=True is a reference run only: the shipped model and the headline baseline both answer without thinking
+    renderer, budget = ("qwen3_5", MAX_OUTPUT_TOKENS + 12000) if thinking else (JUDGE_RENDERER, MAX_OUTPUT_TOKENS)
+    completer = make_completer(service, BASE_MODEL, model_path=path, renderer_name=renderer, temperature=0.0, max_tokens=budget)
     return path or BASE_MODEL, completer
 
 
@@ -88,9 +90,12 @@ def main() -> None:
     parser.add_argument("--set", choices=[*SETS, "real"], default="synth", dest="set_name")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--concurrency", type=int, default=16)
+    parser.add_argument("--sampler-path", help="evaluate this tinker:// checkpoint instead of the latest run (with --model ft)")
+    parser.add_argument("--thinking", action="store_true", help="reference run with the thinking renderer and a larger token budget")
+    parser.add_argument("--out-name", help="result file prefix, default: the --model value")
     parser.add_argument("--rescore", action="store_true", help="recompute metrics from the saved raw outputs, no sampling")
     args = parser.parse_args()
-    out = RESULTS_DIR / f"{args.model}_{args.set_name}.json"
+    out = RESULTS_DIR / f"{args.out_name or args.model}_{args.set_name}.json"
 
     if args.set_name == "real":
         raise SystemExit("Real letters are never sent to Tinker. Evaluate them with the local model (built in M5).")
@@ -109,9 +114,9 @@ def main() -> None:
     prompt_tokens = sum(len(m["content"]) for r in rows for m in r["messages"][:-1]) // 4
     console.print(f"{len(rows)} cases, ~{prompt_tokens:,} prompt tokens, up to {len(rows) * MAX_OUTPUT_TOKENS:,} output tokens")
 
-    name, completer = make_model(service_client(), args.model)
+    name, completer = make_model(service_client(), args.model, args.sampler_path, args.thinking)
     outputs = asyncio.run(sample_all(rows, completer, args.concurrency))
-    result = {"model": args.model, "model_name": name, "set": args.set_name, "renderer": JUDGE_RENDERER, **score(rows, outputs)}
+    result = {"model": args.out_name or args.model, "model_name": name, "set": args.set_name, "renderer": "qwen3_5" if args.thinking else JUDGE_RENDERER, **score(rows, outputs)}
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, ensure_ascii=False, indent=1))
