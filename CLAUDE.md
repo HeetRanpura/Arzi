@@ -13,6 +13,8 @@ Arzi reads an Indian health insurance claim rejection letter plus policy text an
 - Build milestone by milestone (M1 to M7, SPEC section 11), in order. **Stop at every CHECKPOINT and report to Heet** before continuing. Checkpoint 2 is a go/no-go: if the base model already scores verdict accuracy >= 90% and false hope rate <= 5%, stop and say the fine-tuning story is weak.
 - Ask before anything that would: commit real documents, change the eval set, or spend more than ~US$5 of Tinker credits in one run.
 - Hard deadline: submissions close **Mon Oct 19 2026, ~12:29 PM IST**. The repo must be new and built inside Oct 12 to 18; no reused old code. Any commit after the deadline must be noted in the README.
+- **Git:** commit after every milestone (commits inside the window are the proof of when it was built). Work on feature branches and open PRs into `main` so Copilot review can be requested; CI (`.github/workflows/ci.yml`) runs pytest on every push and PR.
+- Partner tracks are Tinker (primary), Gemma and GitHub Copilot; the Gemma image reader and explainer are SPEC section 16 and belong to M5.
 - Do not build anything in SPEC section 13 (accounts, cloud hosting, sending emails, vision fine-tuning, etc.).
 
 ## Non-negotiables
@@ -33,15 +35,17 @@ uv venv --python 3.11 && uv pip install -e ".[dev]"   # add ,tinker or ,app extr
 .venv/bin/python -m arzi.rules > RULES.md      # regenerate after editing rules.py (a test fails if stale)
 ```
 
-Planned entry points (SPEC section 12); not built until their milestone:
+Built in M2 (need `.[tinker]` and `TINKER_API_KEY`; each prints a token estimate first):
 
 ```bash
-python -m arzi.generate.build_dataset # reproducible splits from a fixed seed
-python -m arzi.train.sft              # LoRA SFT; records checkpoint in train/runs.json
-python -m arzi.eval.run_eval --model base|ft --set synth|real
-python -m arzi.eval.label_real        # labelling CLI for anonymised real letters
-python -m arzi.app.ui                 # local gradio app, must work offline
+.venv/bin/python -m arzi.generate.build_dataset --split pilot --dry-run   # estimate only, no API calls
+.venv/bin/python -m arzi.generate.build_dataset --split pilot             # 40 cases -> data/generated/pilot.jsonl
+.venv/bin/python -m arzi.generate.build_dataset --split all               # train, val, eval_synth
+.venv/bin/python -m arzi.eval.run_eval --model base|ft|teacher --set pilot|synth
+.venv/bin/python -m arzi.eval.report --set pilot|synth                    # synth -> eval/results/summary.md
 ```
+
+Not built yet: `arzi.train.sft` (M3), `arzi.eval.label_real` and `arzi.app.ui` (M5).
 
 `TINKER_API_KEY` lives in `.env` (see `.env.example`). OCR needs system Tesseract.
 
@@ -49,13 +53,16 @@ python -m arzi.app.ui                 # local gradio app, must work offline
 
 Package is `src/arzi/`. The pieces that only make sense together:
 
-- **`rules.py` is the label source.** A deterministic engine maps `CaseFacts` + `Category` to `(Verdict, reason_codes)`, first matching rule wins. It labels all synthetic data *and* cross-checks the model in the app. Rules are a data table (`RULES`) with three-valued tests: if a rule cannot be decided because a fact is `None`, evaluation stops with `WORTH_ASKING` and a `missing_fact:<field>` code (never guess). `RULES.md` is rendered from that table, never edited by hand, and needs Heet's review before training.
+- **`rules.py` is the label source.** A deterministic engine maps `CaseFacts` + `Category` to `(Verdict, reason_codes)`, and labels all synthetic data *and* cross-checks the model in the app. Rules are a data table (`RULES`) with three-valued tests. All contestable rules are checked first and any clearly true one wins; an undecidable one (fact is `None`) gives `WORTH_ASKING` with a `missing_fact:<field>` code; only then are the remaining rules tried in order. So an unknown fact can block `LIKELY_VALID` but never `LIKELY_CONTESTABLE`. `RULES.md` is rendered from that table, never edited by hand, and needs Heet's review before training.
 - **The parser lives in `schema.py`** (`parse_model_output`, raises `ParseError`).
 - **Synthetic data flows code -> code -> LLM -> code:** `generate/facts.py` samples facts, `rules.py` labels them, a large teacher model (via Tinker sampling) writes the rejection letter and policy excerpt from the facts without stating the verdict, a validation pass checks key facts appear in the text, `noise.py` adds OCR-like noise to ~30%. The verdict is never produced by an LLM.
 - **`prompts.py` holds the single system prompt and user template** shared by dataset building, baseline eval, fine-tuned eval, and the local app. Changing it invalidates existing datasets and prior eval numbers.
 - **One parser everywhere.** The model must emit only a JSON object matching `ModelOutput` (`schema.py`). The same tolerant parser (code fences, trailing text) is used in eval and in the app; a parse failure counts as a wrong answer.
 - **Eval set uses held-out letter styles** never seen in train, so the model cannot win by memorising templates. Synthetic and real-letter results are reported separately.
 - **Headline metric is false hope rate:** of cases labelled `LIKELY_VALID`, the share predicted `LIKELY_CONTESTABLE`. The fine-tune must lower it while keeping contestable recall and beating base on verdict accuracy. Moratorium edge cases (55 to 65 months of coverage) are tracked as their own metric.
+- **Real letters are evaluated locally only.** SPEC section 8 mentions running the real set through Tinker sampling, but that contradicts the privacy rule, so `run_eval --set real` refuses; the real set goes through `app/local_model.py` (M5).
+- **Gold facts are what the two documents state**, including distractors: the current policy period and a port-in date appear next to the true first-inception date, and the schedule's standard waiting periods appear in every case. The teacher brief (`Case.letter_points` / `policy_points`) never contains the verdict, and `letters.validate` checks required and forbidden strings before a case is kept.
+- **Target key order is category, facts, verdict, reason, asks** (facts before verdict, so the model extracts before it decides). The system prompt states the rules, so the baseline is told the same decision procedure the labels follow.
 - **Two inference paths:** Tinker sampling clients for training-time eval (base, fine-tuned, optional teacher reference); a merged HF model in `models/arzi-4b/` loaded with `transformers` for the app (`train/export.py` -> `app/local_model.py`).
 - **App pipeline:** `extract.py` (pypdf, OCR fallback) -> local model -> parse -> `rules.py` cross-check on the returned facts -> if model and rules verdicts disagree, show `WORTH_ASKING` with both reasons -> `drafting/` letters and deadlines.
 - **Drafting is template-based, not LLM-generated,** so letters are predictable. Escalation path: insurer grievance cell, then Bima Bharosa, then Insurance Ombudsman.
