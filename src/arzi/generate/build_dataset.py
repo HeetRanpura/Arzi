@@ -28,7 +28,13 @@ from arzi.rules import evaluate
 
 OUT_DIR = Path("data/generated")
 RAW_DIR = OUT_DIR / "raw"
-SPLITS = {"pilot": 40, "train": 600, "val": 60, "eval_synth": 80}
+SPLITS = {"pilot": 40, "train": 600, "val": 60, "eval_synth": 120}
+# forced 55-65 month non-disclosure cases; above the 20 required so drops cannot take it below
+MIN_MORATORIUM_EDGE = {"eval_synth": 24}
+EVAL_MIN_EDGE, EVAL_MIN_PER_VERDICT = 20, 30
+# gpt-oss-120b on Tinker, US$ per million tokens
+TEACHER_PRICE_IN, TEACHER_PRICE_OUT = 0.33, 0.84
+MAX_RUN_COST_USD = 5.0
 HELD_OUT_STYLE_SPLITS = {"eval_synth"}
 NOISE_SHARE = 0.30
 TEACHER_MAX_TOKENS = 3000
@@ -59,7 +65,7 @@ def build_row(case: Case, docs: Documents, seed: int) -> dict:
 
 
 async def build_split(split: str, n: int, seed: int, teacher, concurrency: int) -> list[dict]:
-    cases = sample_cases(n, seed, split)
+    cases = sample_cases(n, seed, split, MIN_MORATORIUM_EDGE.get(split, 0))
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     gate = asyncio.Semaphore(concurrency)
 
@@ -70,7 +76,7 @@ async def build_split(split: str, n: int, seed: int, teacher, concurrency: int) 
         else:
             style = pick_style(random.Random(f"{seed}:{case.case_id}:style"), split in HELD_OUT_STYLE_SPLITS)
             async with gate:
-                docs = await write_documents(case, style, teacher)
+                docs = await write_documents(case, style, teacher, max_attempts=4)
             if docs is None:
                 return None
             cache.write_text(json.dumps(asdict(docs), ensure_ascii=False, indent=1))
@@ -82,17 +88,27 @@ async def build_split(split: str, n: int, seed: int, teacher, concurrency: int) 
     for key in ("category", "verdict"):
         console.print(f"  {key}: {dict(Counter(r['meta'][key] for r in kept).most_common())}")
     console.print(f"  noisy: {sum(r['meta']['noisy'] for r in kept)}, moratorium edge: {sum(r['meta']['moratorium_edge'] for r in kept)}")
+    if split == "eval_synth":
+        verdicts = Counter(r["meta"]["verdict"] for r in kept)
+        edges = sum(r["meta"]["moratorium_edge"] for r in kept)
+        if edges < EVAL_MIN_EDGE or min(verdicts.values()) < EVAL_MIN_PER_VERDICT:
+            console.print(f"[red]eval_synth is below target: {edges} moratorium edge (need {EVAL_MIN_EDGE}), verdicts {dict(verdicts)} (need {EVAL_MIN_PER_VERDICT} each)[/red]")
     return kept
 
 
-def estimate_teacher_tokens(splits: dict[str, int], seed: int) -> int:
-    """Rough upper bound (chars / 4 in, full budget out) for cases not already cached."""
-    total = 0
+def estimate_teacher_cost(splits: dict[str, int], seed: int) -> tuple[int, int, float]:
+    """(input tokens, output tokens, US$) for cases not already cached.
+
+    One attempt per case at the full output budget; chars / 4 for input. The
+    pilot used far less output than the budget and about 1.2 attempts per case.
+    """
+    tokens_in = tokens_out = 0
     for split, n in splits.items():
-        for case in sample_cases(n, seed, split):
+        for case in sample_cases(n, seed, split, MIN_MORATORIUM_EDGE.get(split, 0)):
             if not (RAW_DIR / f"{seed}-{case.case_id}.json").exists():
-                total += len(teacher_messages(case, "x" * 120)[0]["content"]) // 4 + TEACHER_MAX_TOKENS
-    return total
+                tokens_in += len(teacher_messages(case, "x" * 120)[0]["content"]) // 4
+                tokens_out += TEACHER_MAX_TOKENS
+    return tokens_in, tokens_out, (tokens_in * TEACHER_PRICE_IN + tokens_out * TEACHER_PRICE_OUT) / 1e6
 
 
 def main() -> None:
@@ -105,7 +121,10 @@ def main() -> None:
     args = parser.parse_args()
 
     splits = {k: v for k, v in SPLITS.items() if k != "pilot"} if args.split == "all" else {args.split: args.n or SPLITS[args.split]}
-    console.print(f"Teacher token estimate for uncached cases (upper bound): ~{estimate_teacher_tokens(splits, args.seed):,}")
+    tokens_in, tokens_out, cost = estimate_teacher_cost(splits, args.seed)
+    console.print(f"Teacher estimate for uncached cases: ~{tokens_in:,} input + up to {tokens_out:,} output tokens, about US${cost:.2f}")
+    if cost > MAX_RUN_COST_USD:
+        raise SystemExit(f"Estimated cost is above US${MAX_RUN_COST_USD:.0f}. Not starting; ask Heet first.")
     if args.dry_run:
         return
 

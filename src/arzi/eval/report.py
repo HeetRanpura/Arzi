@@ -18,16 +18,18 @@ ROWS = [
     ("valid_json_rate", "Valid JSON rate", True),
     ("category_accuracy", "Category accuracy", True),
     ("verdict_accuracy", "Verdict accuracy", True),
-    ("contestable_recall", "Contestable recall", True),
-    ("false_hope_rate", "**False hope rate** (lower is better)", False),
+    ("contestable_recall", "**Contestable recall** (catches fightable claims)", True),
+    ("over_optimism_rate", "**Over-optimism rate** (not contestable, called contestable; lower is better)", False),
+    ("false_hope_rate", "False hope rate (valid, called contestable; lower is better)", False),
     ("moratorium_edge_accuracy", "Moratorium edge accuracy", True),
     ("fact_accuracy", "Fact accuracy", True),
 ]
 console = Console()
 
 
-def pct(x: float | None) -> str:
-    return "n/a" if x is None else f"{100 * x:.1f}%"
+def pct(metrics: dict, key: str) -> str:
+    hits, total = metrics["counts"][key]
+    return f"{100 * hits / total:.1f}% ({hits}/{total})" if total else "n/a (0)"
 
 
 def render_summary(results: dict[str, dict], set_name: str) -> str:
@@ -43,7 +45,7 @@ def render_summary(results: dict[str, dict], set_name: str) -> str:
         "| --- |" + " ---: |" * len(models),
     ]
     for key, label, _ in ROWS:
-        lines.append(f"| {label} | " + " | ".join(pct(results[m]["metrics"][key]) for m in models) + " |")
+        lines.append(f"| {label} | " + " | ".join(pct(results[m]["metrics"], key) for m in models) + " |")
     return "\n".join(lines) + "\n"
 
 

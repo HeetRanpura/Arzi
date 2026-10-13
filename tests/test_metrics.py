@@ -35,6 +35,8 @@ def test_false_hope_and_recall():
     m = compute_metrics(records)
     assert m["n"] == 8 and m["n_valid"] == 4 and m["n_contestable"] == 3
     assert m["false_hope_rate"] == 1 / 4
+    assert m["over_optimism_rate"] == 1 / 5  # 4 valid + 1 worth asking, one called contestable
+    assert m["counts"]["over_optimism_rate"] == [1, 5] and m["counts"]["contestable_recall"] == [1, 3]
     assert m["contestable_recall"] == 1 / 3
     assert m["valid_json_rate"] == 6 / 8
     assert m["verdict_accuracy"] == 3 / 8

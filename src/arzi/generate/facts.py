@@ -209,6 +209,7 @@ class _Builder:
         self.show_policy_period = True
         self.state_room_rent: bool | None = None  # None = decide at random
         self.sum_insured = rng.choice([300000, 500000, 500000, 1000000, 1500000])
+        self.force_edge = False  # non-disclosure only: put cover in the 55 to 65 month band
 
     def d(self, value: date) -> str:
         return format_date(value, self.fmt)
@@ -231,8 +232,8 @@ def _ped(b: _Builder, s: str) -> None:
     rng = b.rng
     cond, key, related_dx, unrelated_dx = rng.choice(PED_PAIRS)
     if s == "moratorium":
-        months = rng.choice([60, 60, 61, 62, 63, 64, 65]) if rng.random() < 0.5 else rng.randint(66, 88)
-    elif rng.random() < (0.25 if s == "valid" else 0.15):
+        months = rng.choice([60, 60, 61, 62, 63, 64, 65]) if b.force_edge or rng.random() < 0.5 else rng.randint(66, 88)
+    elif b.force_edge or rng.random() < (0.25 if s == "valid" else 0.15):
         months = rng.randint(55, 59)
     else:
         months = rng.randint(2, 54)
@@ -493,8 +494,9 @@ _SAMPLERS = {
 }
 
 
-def sample_case(rng: random.Random, case_id: str, category: Category, scenario: str) -> Case:
+def sample_case(rng: random.Random, case_id: str, category: Category, scenario: str, force_edge: bool = False) -> Case:
     b = _Builder(rng)
+    b.force_edge = force_edge
     _SAMPLERS[category](b, scenario)
     inception, admission = b.inception, b.admission
     months = months_between(inception, admission)
@@ -571,8 +573,12 @@ def sample_case(rng: random.Random, case_id: str, category: Category, scenario: 
     return case
 
 
-def sample_cases(n: int, seed: int, prefix: str) -> list[Case]:
-    """n cases with the SPEC category mix and per-category scenario weights, deterministic in seed."""
+def sample_cases(n: int, seed: int, prefix: str, min_moratorium_edge: int = 0) -> list[Case]:
+    """n cases with the SPEC category mix and per-category scenario weights, deterministic in seed.
+
+    `min_moratorium_edge` forces that many non-disclosure cases into the 55 to 65
+    month band (used for the eval set, so the edge metric rests on enough cases).
+    """
     rng = random.Random(f"{seed}:{prefix}:plan")
     plan: list[tuple[Category, str]] = []
     categories = list(CATEGORY_MIX)
@@ -581,7 +587,9 @@ def sample_cases(n: int, seed: int, prefix: str) -> list[Case]:
         for (name, _, _), k in zip(scenarios, allocate(count, [w for _, w, _ in scenarios], rng)):
             plan += [(category, name)] * k
     rng.shuffle(plan)
+    ped = [i for i, (category, _) in enumerate(plan) if category is Category.NON_DISCLOSURE_PED]
+    forced = set(random.Random(f"{seed}:{prefix}:edge").sample(ped, min(min_moratorium_edge, len(ped))))
     return [
-        sample_case(random.Random(f"{seed}:{prefix}:{i}"), f"{prefix}-{i:04d}", category, scenario)
+        sample_case(random.Random(f"{seed}:{prefix}:{i}"), f"{prefix}-{i:04d}", category, scenario, i in forced)
         for i, (category, scenario) in enumerate(plan)
     ]

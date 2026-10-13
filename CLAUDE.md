@@ -45,7 +45,13 @@ Built in M2 (need `.[tinker]` and `TINKER_API_KEY`; each prints a token estimate
 .venv/bin/python -m arzi.eval.report --set pilot|synth                    # synth -> eval/results/summary.md
 ```
 
-Not built yet: `arzi.train.sft` (M3), `arzi.eval.label_real` and `arzi.app.ui` (M5).
+```bash
+.venv/bin/python -m arzi.train.sft --dry-run            # exact token count and cost, no training
+.venv/bin/python -m arzi.train.sft --name v1            # appends the sampler checkpoint to train/runs.json
+.venv/bin/python -m arzi.eval.run_eval --model base --set pilot --rescore   # recompute metrics from saved outputs
+```
+
+Data generation and training refuse to start if their estimate is above US$5. Not built yet: `arzi.eval.label_real` and `arzi.app.ui` (M5).
 
 `TINKER_API_KEY` lives in `.env` (see `.env.example`). OCR needs system Tesseract.
 
@@ -59,7 +65,7 @@ Package is `src/arzi/`. The pieces that only make sense together:
 - **`prompts.py` holds the single system prompt and user template** shared by dataset building, baseline eval, fine-tuned eval, and the local app. Changing it invalidates existing datasets and prior eval numbers.
 - **One parser everywhere.** The model must emit only a JSON object matching `ModelOutput` (`schema.py`). The same tolerant parser (code fences, trailing text) is used in eval and in the app; a parse failure counts as a wrong answer.
 - **Eval set uses held-out letter styles** never seen in train, so the model cannot win by memorising templates. Synthetic and real-letter results are reported separately.
-- **Headline metric is false hope rate:** of cases labelled `LIKELY_VALID`, the share predicted `LIKELY_CONTESTABLE`. The fine-tune must lower it while keeping contestable recall and beating base on verdict accuracy. Moratorium edge cases (55 to 65 months of coverage) are tracked as their own metric.
+- **Headline pair is contestable recall and over-optimism rate** (of cases *not* labelled contestable, the share predicted contestable): the base model is wrong in both directions. The strict false hope rate (valid called contestable) stays in the table. Reports show counts next to every percentage. `eval_synth` is ~120 cases with at least 20 forced moratorium-edge cases and 30 per verdict. Moratorium edge cases (55 to 65 months of coverage) are tracked as their own metric.
 - **Real letters are evaluated locally only.** SPEC section 8 mentions running the real set through Tinker sampling, but that contradicts the privacy rule, so `run_eval --set real` refuses; the real set goes through `app/local_model.py` (M5).
 - **Gold facts are what the two documents state**, including distractors: the current policy period and a port-in date appear next to the true first-inception date, and the schedule's standard waiting periods appear in every case. The teacher brief (`Case.letter_points` / `policy_points`) never contains the verdict, and `letters.validate` checks required and forbidden strings before a case is kept.
 - **Target key order is category, facts, verdict, reason, asks** (facts before verdict, so the model extracts before it decides). The system prompt states the rules, so the baseline is told the same decision procedure the labels follow.

@@ -88,14 +88,24 @@ def main() -> None:
     parser.add_argument("--set", choices=[*SETS, "real"], default="synth", dest="set_name")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--concurrency", type=int, default=16)
+    parser.add_argument("--rescore", action="store_true", help="recompute metrics from the saved raw outputs, no sampling")
     args = parser.parse_args()
+    out = RESULTS_DIR / f"{args.model}_{args.set_name}.json"
 
     if args.set_name == "real":
         raise SystemExit("Real letters are never sent to Tinker. Evaluate them with the local model (built in M5).")
 
+    rows = load_rows(SETS[args.set_name], args.limit)
+    if args.rescore:
+        result = json.loads(out.read_text())
+        raw = {c["case_id"]: c["raw"] for c in result["cases"]}
+        result.update(score(rows, [raw[r["meta"]["case_id"]] for r in rows]))
+        out.write_text(json.dumps(result, ensure_ascii=False, indent=1))
+        console.print(f"rescored {out}")
+        return
+
     from arzi.tinker_client import service_client
 
-    rows = load_rows(SETS[args.set_name], args.limit)
     prompt_tokens = sum(len(m["content"]) for r in rows for m in r["messages"][:-1]) // 4
     console.print(f"{len(rows)} cases, ~{prompt_tokens:,} prompt tokens, up to {len(rows) * MAX_OUTPUT_TOKENS:,} output tokens")
 
@@ -104,7 +114,6 @@ def main() -> None:
     result = {"model": args.model, "model_name": name, "set": args.set_name, "renderer": JUDGE_RENDERER, **score(rows, outputs)}
 
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    out = RESULTS_DIR / f"{args.model}_{args.set_name}.json"
     out.write_text(json.dumps(result, ensure_ascii=False, indent=1))
     console.print({k: v for k, v in result["metrics"].items() if k != "fact_accuracy_by_field"})
     console.print(f"wrote {out}")

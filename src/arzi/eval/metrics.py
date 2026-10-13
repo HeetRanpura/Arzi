@@ -25,11 +25,24 @@ def _rate(hits: int, total: int) -> float | None:
     return hits / total if total else None
 
 
+METRIC_KEYS = [
+    "valid_json_rate",
+    "category_accuracy",
+    "verdict_accuracy",
+    "contestable_recall",
+    "over_optimism_rate",
+    "false_hope_rate",
+    "moratorium_edge_accuracy",
+    "fact_accuracy",
+]
+
+
 def compute_metrics(records: list[Record]) -> dict:
     n = len(records)
     verdict_ok = [r.pred is not None and r.pred.verdict is r.gold.verdict for r in records]
     contestable = [r for r in records if r.gold.verdict is Verdict.LIKELY_CONTESTABLE]
     valid = [r for r in records if r.gold.verdict is Verdict.LIKELY_VALID]
+    not_contestable = [r for r in records if r.gold.verdict is not Verdict.LIKELY_CONTESTABLE]
     edge = [ok for r, ok in zip(records, verdict_ok) if is_moratorium_edge(r.gold)]
 
     def predicted_contestable(rs: list[Record]) -> int:
@@ -46,15 +59,24 @@ def compute_metrics(records: list[Record]) -> dict:
     fact_hits = sum(h for h, _ in per_field.values())
     fact_total = sum(t for _, t in per_field.values())
 
+    # [hits, total] behind every rate, so reports can show counts next to percentages
+    counts = {
+        "valid_json_rate": [sum(r.pred is not None for r in records), n],
+        "category_accuracy": [sum(r.pred is not None and r.pred.category is r.gold.category for r in records), n],
+        "verdict_accuracy": [sum(verdict_ok), n],
+        # headline pair: catches fightable claims ...
+        "contestable_recall": [predicted_contestable(contestable), len(contestable)],
+        # ... without over-promising: of cases NOT labelled contestable, share predicted contestable
+        "over_optimism_rate": [predicted_contestable(not_contestable), len(not_contestable)],
+        # strict version: of cases labelled valid, share predicted contestable
+        "false_hope_rate": [predicted_contestable(valid), len(valid)],
+        "moratorium_edge_accuracy": [sum(edge), len(edge)],
+        "fact_accuracy": [fact_hits, fact_total],
+    }
     return {
         "n": n,
-        "valid_json_rate": _rate(sum(r.pred is not None for r in records), n),
-        "category_accuracy": _rate(sum(r.pred is not None and r.pred.category is r.gold.category for r in records), n),
-        "verdict_accuracy": _rate(sum(verdict_ok), n),
-        "contestable_recall": _rate(predicted_contestable(contestable), len(contestable)),
-        "false_hope_rate": _rate(predicted_contestable(valid), len(valid)),
-        "moratorium_edge_accuracy": _rate(sum(edge), len(edge)),
-        "fact_accuracy": _rate(fact_hits, fact_total),
+        **{key: _rate(*counts[key]) for key in METRIC_KEYS},
+        "counts": counts,
         "n_contestable": len(contestable),
         "n_valid": len(valid),
         "n_moratorium_edge": len(edge),

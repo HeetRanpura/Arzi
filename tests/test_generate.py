@@ -13,6 +13,7 @@ from arzi.rules import ASK_CLAUSE, evaluate
 from arzi.schema import Category, Verdict, parse_model_output
 
 CASES = sample_cases(740, 0, "t")
+CASES_40 = sample_cases(40, 0, "t")
 
 
 def test_sampling_is_deterministic():
@@ -36,6 +37,15 @@ def test_verdict_balance_and_moratorium_edges():
     assert min(verdicts.values()) / len(CASES) >= 0.25
     ped = [c for c in CASES if c.category is Category.NON_DISCLOSURE_PED]
     assert sum(c.is_moratorium_edge for c in ped) / len(ped) >= 0.15
+
+
+def test_eval_set_has_enough_moratorium_edges_and_verdicts():
+    cases = sample_cases(120, 0, "eval_synth", min_moratorium_edge=24)
+    assert sum(c.is_moratorium_edge for c in cases) >= 24
+    verdicts = Counter(evaluate(c.category, c.facts).verdict for c in cases)
+    assert min(verdicts.values()) >= 32
+    # forcing edges must not disturb the default sampling
+    assert [c.facts for c in sample_cases(40, 0, "t", 0)] == [c.facts for c in CASES_40]
 
 
 def test_facts_are_consistent():

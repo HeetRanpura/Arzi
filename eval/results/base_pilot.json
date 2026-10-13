@@ -9,9 +9,44 @@
   "category_accuracy": 0.9473684210526315,
   "verdict_accuracy": 0.47368421052631576,
   "contestable_recall": 0.2727272727272727,
+  "over_optimism_rate": 0.25925925925925924,
   "false_hope_rate": 0.0,
   "moratorium_edge_accuracy": 1.0,
   "fact_accuracy": 0.8715953307392996,
+  "counts": {
+   "valid_json_rate": [
+    38,
+    38
+   ],
+   "category_accuracy": [
+    36,
+    38
+   ],
+   "verdict_accuracy": [
+    18,
+    38
+   ],
+   "contestable_recall": [
+    3,
+    11
+   ],
+   "over_optimism_rate": [
+    7,
+    27
+   ],
+   "false_hope_rate": [
+    0,
+    13
+   ],
+   "moratorium_edge_accuracy": [
+    2,
+    2
+   ],
+   "fact_accuracy": [
+    224,
+    257
+   ]
+  },
   "n_contestable": 11,
   "n_valid": 13,
   "n_moratorium_edge": 2,
