@@ -312,7 +312,7 @@ The project and package are named **Arzi** (`src/arzi/`); earlier drafts of this
 
 * `.github/workflows/ci.yml`: on push and pull_request, set up Python 3.11, install deps, run pytest (includes the RULES.md drift test).
 * `.github/workflows/eval.yml`: on workflow_dispatch only, uses secret TINKER_API_KEY, runs `python -m arzi.eval.run_eval` for base and fine-tuned on eval_synth, writes eval/results/summary.md to the job summary (`$GITHUB_STEP_SUMMARY`) and uploads it as an artifact. Never runs on real data.
-* Work on feature branches and open PRs into main so Copilot code review can be requested on them.
+* ~~Work on feature branches and open PRs into main so Copilot code review can be requested on them.~~ Changed Oct 14: commit and push directly to main, no PRs.
 
 ### 16b. Gemma 4 reader (Milestone M5, after the PDF path works)
 
