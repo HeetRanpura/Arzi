@@ -13,7 +13,7 @@ Arzi reads an Indian health insurance claim rejection letter plus policy text an
 - Build milestone by milestone (M1 to M7, SPEC section 11), in order. **Stop at every CHECKPOINT and report to Heet** before continuing. Checkpoint 2 is a go/no-go: if the base model already scores verdict accuracy >= 90% and false hope rate <= 5%, stop and say the fine-tuning story is weak.
 - Ask before anything that would: commit real documents, change the eval set, or spend more than ~US$5 of Tinker credits in one run.
 - Hard deadline: submissions close **Mon Oct 19 2026, ~12:29 PM IST**. The repo must be new and built inside Oct 12 to 18; no reused old code. Any commit after the deadline must be noted in the README.
-- **Git:** commit after every milestone (commits inside the window are the proof of when it was built). Work on feature branches and open PRs into `main` so Copilot review can be requested; CI (`.github/workflows/ci.yml`) runs pytest on every push and PR.
+- **Git:** commit after every milestone (commits inside the window are the proof of when it was built). Commit on `main` and push directly; do not create branches or PRs (Heet's instruction, Oct 14, replacing SPEC 16a's PR workflow). CI (`.github/workflows/ci.yml`) runs pytest on every push and PR.
 - Partner tracks are Tinker (primary), Gemma and GitHub Copilot; the Gemma image reader and explainer are SPEC section 16 and belong to M5.
 - Do not build anything in SPEC section 13 (accounts, cloud hosting, sending emails, vision fine-tuning, etc.).
 
