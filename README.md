@@ -16,6 +16,10 @@ uv pip install -e ".[dev]"
 .venv/bin/pytest
 ```
 
+## Evaluation notes
+
+- **Base model with thinking on.** As a reference, the base model was also run with thinking enabled and a 12,700-token budget. It completed only 7 of 117 answers within the budget, so it is not reported as a baseline. Raw results: [eval/results/base_thinking_synth.json](eval/results/base_thinking_synth.json).
+
 ## License
 
 Code is MIT (see [LICENSE](LICENSE)). The fine-tuned model is derived from `Qwen/Qwen3.5-4B` and is subject to that model's own license.
