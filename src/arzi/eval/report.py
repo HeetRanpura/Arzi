@@ -93,6 +93,39 @@ def regressions(results: dict[str, dict]) -> list[str]:
     return out
 
 
+SET_TITLES = {"synth": "Synthetic held-out styles", "ood": "Out-of-generator"}
+
+
+def load_results(set_name: str, ft_name: str = "ft") -> dict[str, dict]:
+    results = {}
+    for model in LABELS:
+        path = RESULTS_DIR / f"{ft_name if model == 'ft' else model}_{set_name}.json"
+        if path.exists():
+            results[model] = json.loads(path.read_text())
+    return results
+
+
+def cross_set_table(by_set: dict[str, dict[str, dict]]) -> list[str]:
+    """Base and fine-tuned on each eval set, side by side."""
+    sets = [s for s in SET_TITLES if "base" in by_set.get(s, {}) and "ft" in by_set.get(s, {})]
+    if len(sets) < 2:
+        return []
+    header = " | ".join(f"{SET_TITLES[s]}: {LABELS[m]}" for s in sets for m in ("base", "ft"))
+    lines = [
+        "## Synthetic held-out styles vs out-of-generator",
+        "",
+        "Synthetic held-out styles: written by the training teacher (gpt-oss-120b) in four letter styles never used in training. "
+        "Out-of-generator: same rule-derived facts and labels, documents written by a different model family (Kimi-K2.6) "
+        "from a free-form prompt with no templates or noise.",
+        "",
+        f"| Metric | {header} |",
+        "| --- |" + " ---: |" * (2 * len(sets)),
+    ]
+    for key, label, _ in ROWS:
+        lines.append(f"| {label} | " + " | ".join(pct(by_set[s][m]["metrics"], key) for s in sets for m in ("base", "ft")) + " |")
+    return lines
+
+
 def render_summary(results: dict[str, dict], set_name: str) -> str:
     models = [m for m in LABELS if m in results]
     first = results[models[0]]["metrics"]
@@ -126,15 +159,15 @@ def main() -> None:
     parser.add_argument("--out", help="output file name inside eval/results/")
     args = parser.parse_args()
 
-    results = {}
-    for model in LABELS:
-        path = RESULTS_DIR / f"{args.ft_name if model == 'ft' else model}_{args.set_name}.json"
-        if path.exists():
-            results[model] = json.loads(path.read_text())
+    results = load_results(args.set_name, args.ft_name)
     if not results:
         raise SystemExit(f"no results for set {args.set_name!r} in {RESULTS_DIR}; run arzi.eval.run_eval first")
 
     summary = render_summary(results, args.set_name)
+    if args.set_name == "synth":
+        extra = cross_set_table({s: load_results(s, args.ft_name) for s in SET_TITLES})
+        if extra:
+            summary += "\n" + "\n".join(extra) + "\n"
     out = RESULTS_DIR / (args.out or ("summary.md" if args.set_name == "synth" else f"summary_{args.set_name}.md"))
     out.write_text(summary)
     console.print(summary)

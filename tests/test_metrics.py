@@ -97,3 +97,18 @@ def test_report_flags_headline_regressions_and_shows_counts():
     assert "Months-of-cover fact accuracy | 50.0% (1/2) | 0.0% (0/2)" in text
     assert "| **likely_contestable** | 2 | 0 | 0 | 0 |" in text and "| **likely_contestable** | 0 | 0 | 1 | 1 |" in text
     assert "| c0 | non_disclosure_ped / s | likely_contestable | likely_contestable | likely_valid |" in text
+
+
+def test_real_rows_loader_builds_eval_rows(tmp_path, monkeypatch):
+    import json as _json
+
+    from arzi.eval import run_eval
+
+    label = out(PED, C, months_continuous_coverage=61).model_dump(mode="json")
+    (tmp_path / "case1.json").write_text(_json.dumps({"case_id": "r1", "letter": "fictional letter", "policy": "fictional policy", "label": label}))
+    monkeypatch.setattr(run_eval, "REAL_DIR", tmp_path)
+    rows = run_eval.load_real_rows()
+    assert [r["meta"]["case_id"] for r in rows] == ["r1"]
+    assert "fictional letter" in rows[0]["messages"][1]["content"]
+    perfect = run_eval.score(rows, [rows[0]["messages"][2]["content"]])["metrics"]
+    assert perfect["verdict_accuracy"] == 1.0
