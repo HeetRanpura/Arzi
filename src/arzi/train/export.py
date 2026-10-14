@@ -24,6 +24,35 @@ from arzi.tinker_client import BASE_MODEL
 
 RUNS_FILE = Path("train/runs.json")
 MERGED_DIR = Path("models/arzi-4b")
+BASE_DIR = Path("models/base-src")  # local copy of the base weights, consumed by the merge
+
+
+def merge_consuming_base(adapter_dir: Path) -> None:
+    """Merge with the cookbook's shard path, deleting each base shard once it is in memory.
+
+    The base model (9.3 GB) and the merged copy (about the same) do not both fit on the
+    dev machine, so peak disk use is kept to roughly one copy plus one shard. The base
+    weights are gone afterwards; the base config and tokenizer files are kept.
+    """
+    from huggingface_hub import snapshot_download
+    from tinker_cookbook.weights import build_hf_model
+    from tinker_cookbook.weights._export import _shard_engine
+
+    snapshot_download(BASE_MODEL, local_dir=BASE_DIR)
+    original_load = _shard_engine.load_file
+
+    def load_then_delete(path, *args, **kwargs):
+        tensors = original_load(path, *args, **kwargs)
+        source = Path(path).resolve()
+        if source.is_relative_to(BASE_DIR.resolve()) and source.suffix == ".safetensors":
+            source.unlink()
+        return tensors
+
+    _shard_engine.load_file = load_then_delete
+    try:
+        build_hf_model(base_model=str(BASE_DIR), adapter_path=str(adapter_dir), output_path=str(MERGED_DIR), trust_remote_code=True)
+    finally:
+        _shard_engine.load_file = original_load
 
 
 def download_adapter(state_path: str, name: str, out_dir: Path) -> None:
@@ -49,8 +78,6 @@ def main() -> None:
     parser.add_argument("--adapter-only", action="store_true")
     args = parser.parse_args()
 
-    from tinker_cookbook import weights
-
     load_dotenv(Path.cwd() / ".env")
     runs = json.loads(RUNS_FILE.read_text())
     run = next(r for r in runs if r["name"] == args.run) if args.run else runs[-1]
@@ -61,11 +88,10 @@ def main() -> None:
     if args.adapter_only:
         return
 
-    # the base model is ~9.3 GB and the merged copy about the same; check before starting
     free_gb = shutil.disk_usage(".").free / 1e9
-    if free_gb < 22:
-        raise SystemExit(f"Only {free_gb:.0f} GB free; merging needs about 22 GB (base download + merged copy + headroom).")
-    weights.build_hf_model(base_model=BASE_MODEL, adapter_path=str(adapter_dir), output_path=str(MERGED_DIR), trust_remote_code=True)
+    if free_gb < 13:
+        raise SystemExit(f"Only {free_gb:.0f} GB free; the merge needs about 13 GB (one model copy plus one shard and headroom).")
+    merge_consuming_base(adapter_dir)
     print(f"merged model: {MERGED_DIR}")
 
 
