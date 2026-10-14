@@ -53,3 +53,18 @@
 | eval_synth-0005 | documents_or_late_intimation / late_intimation | worth_asking | likely_contestable | worth_asking |
 | eval_synth-0006 | non_disclosure_ped / disclosure_unknown | worth_asking | likely_contestable | worth_asking |
 | eval_synth-0017 | no_hospitalisation_needed / short_stay | worth_asking | likely_valid | worth_asking |
+
+## Synthetic held-out styles vs out-of-generator
+
+Synthetic held-out styles: written by the training teacher (gpt-oss-120b) in four letter styles never used in training. Out-of-generator: same rule-derived facts and labels, documents written by a different model family (Kimi-K2.6) from a free-form prompt with no templates or noise.
+
+| Metric | Synthetic held-out styles: Base Qwen3.5-4B | Synthetic held-out styles: Fine-tuned | Out-of-generator: Base Qwen3.5-4B | Out-of-generator: Fine-tuned |
+| --- | ---: | ---: | ---: | ---: |
+| Valid JSON rate | 100.0% (117/117) | 100.0% (117/117) | 100.0% (15/15) | 100.0% (15/15) |
+| Category accuracy | 96.6% (113/117) | 99.1% (116/117) | 93.3% (14/15) | 100.0% (15/15) |
+| Verdict accuracy | 43.6% (51/117) | 97.4% (114/117) | 66.7% (10/15) | 93.3% (14/15) |
+| **Contestable recall** (catches fightable claims) | 36.1% (13/36) | 97.2% (35/36) | 60.0% (3/5) | 80.0% (4/5) |
+| **Over-optimism rate** (not contestable, called contestable; lower is better) | 28.4% (23/81) | 1.2% (1/81) | 20.0% (2/10) | 0.0% (0/10) |
+| False hope rate (valid, called contestable; lower is better) | 13.5% (5/37) | 2.7% (1/37) | 0.0% (0/5) | 0.0% (0/5) |
+| Moratorium edge accuracy | 34.6% (9/26) | 92.3% (24/26) | 60.0% (3/5) | 100.0% (5/5) |
+| Fact accuracy | 85.3% (675/791) | 98.7% (781/791) | 88.3% (91/103) | 98.1% (101/103) |
