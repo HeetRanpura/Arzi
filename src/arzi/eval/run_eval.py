@@ -143,9 +143,9 @@ def main() -> None:
     if args.local:
         from arzi.app.local_model import LocalModel
 
-        model = LocalModel.load(fine_tuned=args.model == "ft")
-        console.print(f"{len(rows)} cases, local model {model.name}")
-        outputs = [model.generate(r["messages"][:-1]) for r in rows]
+        with LocalModel.load(fine_tuned=args.model == "ft") as model:
+            console.print(f"{len(rows)} cases, local model {model.name}")
+            outputs = [model.generate(r["messages"][:-1]) for r in rows]
         result = {"model": args.out_name or args.model, "model_name": model.name, "set": args.set_name, "renderer": JUDGE_RENDERER, "backend": "local", **score(rows, outputs)}
         if args.set_name == "real":
             for case in result["cases"]:  # keep only labels and verdicts; no letter text or raw output on disk
