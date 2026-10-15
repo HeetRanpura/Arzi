@@ -21,7 +21,12 @@ from arzi.prompts import MAX_OUTPUT_TOKENS
 from arzi.schema import ParseError, parse_model_output
 from arzi.tinker_client import BASE_MODEL, JUDGE_RENDERER
 
-SETS = {"synth": Path("data/generated/eval_synth.jsonl"), "pilot": Path("data/generated/pilot.jsonl")}
+SETS = {
+    "synth": Path("data/generated/eval_synth.jsonl"),
+    "pilot": Path("data/generated/pilot.jsonl"),
+    "ood": Path("data/ood/ood.jsonl"),  # out-of-generator: different writer model, free-form prompt
+}
+REAL_DIR = Path("data/real")  # gitignored; only ever evaluated with the local model
 RESULTS_DIR = Path("eval/results")
 RUNS_FILE = Path("train/runs.json")
 console = Console()
@@ -30,6 +35,28 @@ console = Console()
 def load_rows(path: Path, limit: int | None = None) -> list[dict]:
     rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
     return rows[:limit] if limit else rows
+
+
+def load_real_rows() -> list[dict]:
+    """data/real/*.json, each {"case_id", "letter", "policy", "label": ModelOutput JSON}, as eval rows.
+
+    Written by `python -m arzi.eval.label_real`. Contents are never printed.
+    """
+    from arzi.prompts import build_messages, render_target
+    from arzi.schema import ModelOutput
+
+    rows = []
+    for path in sorted(REAL_DIR.glob("*.json")):
+        item = json.loads(path.read_text())
+        label = ModelOutput.model_validate(item["label"])
+        target = render_target(label.category, label.verdict, label.facts, label.reason, label.ask_insurer_for)
+        rows.append(
+            {
+                "messages": [*build_messages(item["letter"], item["policy"]), {"role": "assistant", "content": target}],
+                "meta": {"case_id": item.get("case_id", path.stem), "scenario": "real"},
+            }
+        )
+    return rows
 
 
 def score(rows: list[dict], outputs: list[str]) -> dict:
@@ -88,6 +115,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--model", choices=["base", "ft", "teacher"], required=True)
     parser.add_argument("--set", choices=[*SETS, "real"], default="synth", dest="set_name")
+    parser.add_argument("--local", action="store_true", help="run the exported model on this machine instead of Tinker (always used for --set real)")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--concurrency", type=int, default=16)
     parser.add_argument("--sampler-path", help="evaluate this tinker:// checkpoint instead of the latest run (with --model ft)")
@@ -98,15 +126,34 @@ def main() -> None:
     out = RESULTS_DIR / f"{args.out_name or args.model}_{args.set_name}.json"
 
     if args.set_name == "real":
-        raise SystemExit("Real letters are never sent to Tinker. Evaluate them with the local model (built in M5).")
-
-    rows = load_rows(SETS[args.set_name], args.limit)
+        if args.model != "ft" and args.model != "base":
+            raise SystemExit("--set real supports --model base or ft only")
+        args.local = True  # real letters never leave this machine
+        rows = load_real_rows()[: args.limit] if args.limit else load_real_rows()
+    else:
+        rows = load_rows(SETS[args.set_name], args.limit)
     if args.rescore:
         result = json.loads(out.read_text())
         raw = {c["case_id"]: c["raw"] for c in result["cases"]}
         result.update(score(rows, [raw[r["meta"]["case_id"]] for r in rows]))
         out.write_text(json.dumps(result, ensure_ascii=False, indent=1))
         console.print(f"rescored {out}")
+        return
+
+    if args.local:
+        from arzi.app.local_model import LocalModel
+
+        with LocalModel.load(fine_tuned=args.model == "ft") as model:
+            console.print(f"{len(rows)} cases, local model {model.name}")
+            outputs = [model.generate(r["messages"][:-1]) for r in rows]
+        result = {"model": args.out_name or args.model, "model_name": model.name, "set": args.set_name, "renderer": JUDGE_RENDERER, "backend": "local", **score(rows, outputs)}
+        if args.set_name == "real":
+            for case in result["cases"]:  # keep only labels and verdicts; no letter text or raw output on disk
+                case.pop("raw", None)
+        RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(result, ensure_ascii=False, indent=1))
+        console.print({k: result["metrics"][k] for k in ("verdict_accuracy", "contestable_recall", "over_optimism_rate", "false_hope_rate")})
+        console.print(f"wrote {out}")
         return
 
     from arzi.tinker_client import service_client

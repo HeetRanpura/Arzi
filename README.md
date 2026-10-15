@@ -16,6 +16,23 @@ uv pip install -e ".[dev]"
 .venv/bin/pytest
 ```
 
+## Local model
+
+The app runs the fine-tuned model on your computer as a 4-bit GGUF (2.6 GB) with llama.cpp. Building it needs about 13 GB of free disk for a short time:
+
+```bash
+brew install llama.cpp tesseract
+git clone --depth 1 https://github.com/ggml-org/llama.cpp tools/llama.cpp-src
+uv pip install -e ".[dev,tinker,app]" -e tools/llama.cpp-src/gguf-py
+.venv/bin/python -m arzi.train.export
+```
+
+This downloads the v1 adapter from Tinker, merges it into Qwen3.5-4B, converts it to Q4_K_M, and deletes the large intermediate files. Checked on 10 eval_synth cases: the 4-bit model gives the same verdicts and facts as the Tinker-sampled v1, and the same verdicts on all 15 out-of-generator cases.
+
+## Evaluation notes
+
+- **Base model with thinking on.** As a reference, the base model was also run with thinking enabled and a 12,700-token budget. It completed only 7 of 117 answers within the budget, so it is not reported as a baseline. Raw results: [eval/results/base_thinking_synth.json](eval/results/base_thinking_synth.json).
+
 ## License
 
 Code is MIT (see [LICENSE](LICENSE)). The fine-tuned model is derived from `Qwen/Qwen3.5-4B` and is subject to that model's own license.
